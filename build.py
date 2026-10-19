@@ -221,12 +221,17 @@ def f(v):
         return 0.0
 
 
+def proj_start():
+    """남은 예상 시작일. ET 19시(첫 경기 무렵) 이후면 오늘 경기는 진행/종료로 보고 내일부터
+    — 오늘 기록은 매치업의 실제 누적에 들어가므로 이중 계산 방지"""
+    now = dt.datetime.now(ET)
+    return now.date() if now.hour < 19 else now.date() + dt.timedelta(days=1)
+
+
 def project_league(cfg, week, team_ids):
     """남은 기간 팀별 예상 합계 {tid: {...}}"""
     lid, typ = cfg["id"], cfg.get("type", "cat")
-    now = dt.datetime.now(ET)
-    # ET 19시 이후면 오늘 경기는 진행/종료로 보고 내일부터 (실제 누적은 매치업 점수에 반영됨)
-    start = now.date() if now.hour < 19 else now.date() + dt.timedelta(days=1)
+    start = proj_start()
     # 이번 주에 속한 날짜만: 첫 팀으로 날짜를 넘겨가며 주차가 바뀌는 지점 확인 (요청 수 절약)
     first, dates, res = team_ids[0], [], []
     for k in range(8):
@@ -285,7 +290,8 @@ def load_proj(cfg, week, team_ids):
         cache = json.load(open(PROJ_CACHE, encoding="utf-8"))
     except Exception:
         cache = {}
-    key = f'{cfg["id"]}-w{week}'
+    # 시작일이 바뀌면(매일 ET 19시 = KST 08시, 서머타임 종료 후 09시) 4시간 안 됐어도 재계산
+    key = f'{cfg["id"]}-w{week}-{proj_start().isoformat()}'
     c = cache.get(key)
     if c and time.time() - c["ts"] < PROJ_MAX_AGE_H * 3600:
         return c["tot"], c["asof"]

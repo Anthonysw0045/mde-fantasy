@@ -7,10 +7,14 @@ docs/data.json 으로 저장한다. docs/index.html 이 이 JSON을 읽어 화�
 실행: py -I dashboard/build.py   (GitHub Actions 에서는 python dashboard/build.py)
 """
 import datetime as dt, html, json, os, re, sys, time, urllib.request
+from concurrent.futures import ThreadPoolExecutor
+from zoneinfo import ZoneInfo
 
 LEAGUES = [
-    {"id": "90403", "name": "MDE Human League", "type": "cat"},      # 9-cat H2H
-    {"id": "245347", "name": "MDE Highscore", "type": "points"},     # 포인트(High Score)
+    {"id": "90403", "name": "MDE Human League", "type": "cat",        # 9-cat H2H
+     "slots": ["PG", "SG", "G", "SF", "PF", "F", "C", "C", "Util", "Util"]},
+    {"id": "245347", "name": "MDE Highscore", "type": "points",       # 포인트(High Score)
+     "slots": ["G", "G", "FC", "FC", "FC", "Util"]},
 ]
 CATS = ["FG%", "FT%", "3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"]
 LOWER_BETTER = {"TO"}
@@ -18,12 +22,15 @@ BASE = "https://basketball.fantasysports.yahoo.com/nba/"
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"}
 KST = dt.timezone(dt.timedelta(hours=9))
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "docs", "data.json")
+PROJ_CACHE = os.path.join(os.path.dirname(OUT), "proj_cache.json")
+PROJ_MAX_AGE_H = 4          # 예상치는 무거움(팀×날짜 페이지) → 4시간마다만 재계산
+ET = ZoneInfo("America/New_York")
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 
-def get(url, tries=3):
+def get(url, tries=5):
     for i in range(tries):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30) as r:
@@ -32,10 +39,11 @@ def get(url, tries=3):
                 return r.read().decode("utf-8", "ignore")
         except PermissionError:
             raise
-        except Exception:
+        except Exception as e:
             if i == tries - 1:
                 raise
-            time.sleep(3)
+            # HTTP 999 = Yahoo 요청 과다 제한 → 길게 쉬었다 재시도
+            time.sleep(20 * (i + 1) if "999" in str(e) else 3)
 
 
 def text(fragment):
@@ -152,6 +160,193 @@ def parse_transactions(s):
     return items[:20]
 
 
+# ── 예상 우세 (풀 출전 가정) ─────────────────────────────────────────────
+# 남은 날짜마다 각 팀 페이지의 Yahoo 일일 예상치(Projected Stats: Today)를 받아
+# 경기 있는 선수를 포지션 칸 수만큼 전원 선발했다고 보고 합산한다. (IL 제외)
+ELIG = {"G": {"PG", "SG", "G"}, "F": {"SF", "PF", "F"}, "FC": {"SF", "PF", "F", "C", "FC"}}
+
+
+def can_play(slot, pos):
+    if slot == "Util":
+        return True
+    return bool(set(pos) & ELIG.get(slot, {slot}))
+
+
+def team_day(lid, tid, date):
+    s = get(f"{BASE}{lid}/{tid}?date={date}&stat1=P&stat2=P")
+    wk = re.search(r"Week (\d+) vs", s)
+    players = []
+    for t in re.findall(r"(?is)<table.*?</table>", s):
+        head = None
+        for tr in re.findall(r"(?is)<tr[^>]*>(.*?)</tr>", t):
+            c = cells(tr)
+            if "Players" in c and "Pos" in c:
+                head = c
+                continue
+            if not head or "ysf-player-name" not in tr:
+                continue
+            # 데이터 행은 Action 칸이 아이콘 2칸 → 'Action' 이후 열은 한 칸씩 밀림
+            ai = head.index("Action") if "Action" in head else 2
+            row = {}
+            for i, h in enumerate(head):
+                j = i if i <= ai else i + 1
+                row[h] = c[j] if j < len(c) else ""
+            pm = re.search(r"\b[A-Z]{2,4} - ([A-Z,]+)", c[1])
+            players.append({"slot": c[0], "pos": pm.group(1).split(",") if pm else [], "row": row})
+    return (int(wk.group(1)) if wk else None), players
+
+
+def pick_starters(players, slots, key):
+    ps = sorted(players, key=key, reverse=True)
+    match = {}
+
+    def tr(i, seen):
+        for j, sl in enumerate(slots):
+            if j in seen or not can_play(sl, ps[i]["pos"]):
+                continue
+            seen.add(j)
+            if j not in match or tr(match[j], seen):
+                match[j] = i
+                return True
+        return False
+    for i in range(len(ps)):
+        tr(i, set())
+    return [ps[i] for i in match.values()]
+
+
+def f(v):
+    try:
+        return float(str(v).replace(",", ""))
+    except ValueError:
+        return 0.0
+
+
+def project_league(cfg, week, team_ids):
+    """남은 기간 팀별 예상 합계 {tid: {...}}"""
+    lid, typ = cfg["id"], cfg.get("type", "cat")
+    now = dt.datetime.now(ET)
+    # ET 19시 이후면 오늘 경기는 진행/종료로 보고 내일부터 (실제 누적은 매치업 점수에 반영됨)
+    start = now.date() if now.hour < 19 else now.date() + dt.timedelta(days=1)
+    # 이번 주에 속한 날짜만: 첫 팀으로 날짜를 넘겨가며 주차가 바뀌는 지점 확인 (요청 수 절약)
+    first, dates, res = team_ids[0], [], []
+    for k in range(8):
+        d = start + dt.timedelta(days=k)
+        wk, players = team_day(lid, first, d.isoformat())
+        if week and wk != week:
+            break
+        dates.append(d)
+        res.append(((first, d), (wk, players)))
+    jobs = [(tid, d) for tid in team_ids[1:] for d in dates]
+
+    def run(j):
+        time.sleep(0.3)  # Yahoo 999 제한 회피용 속도 조절
+        return j, team_day(lid, j[0], j[1].isoformat())
+    with ThreadPoolExecutor(3) as ex:
+        res += list(ex.map(run, jobs))
+    tot = {tid: {"games": 0, "fgm": 0, "fga": 0, "ftm": 0, "fta": 0, "3PTM": 0, "PTS": 0, "REB": 0, "AST": 0,
+                 "ST": 0, "BLK": 0, "TO": 0, "fp": 0.0} for tid in team_ids}
+    for (tid, d), (wk, players) in res:
+        if week and wk != week:
+            continue
+        act = []
+        for p in players:
+            r = p["row"]
+            if p["slot"] in ("IL", "IL+"):
+                continue
+            # 그날 경기 있는 선수만 (선수칸에 'vs XXX'/'@ XXX' 표시). 경기 없는 날 Yahoo는 시즌 예상치를 보여줌 → 제외
+            if not re.search(r"(?:vs|@) [A-Z]{2,4}\b", r.get("Players", "")):
+                continue
+            if typ == "points":
+                if r.get("PTS", "-") in ("-", ""):
+                    continue
+                p["v"] = f(r.get("Fan Pts"))
+            else:
+                if r.get("FGM/A*", "-/-") in ("-/-", ""):
+                    continue
+                p["v"] = f(r.get("PTS"))
+            act.append(p)
+        T = tot[tid]
+        for p in pick_starters(act, cfg["slots"], key=lambda p: p["v"]):
+            r = p["row"]
+            T["games"] += 1
+            if typ == "points":
+                T["fp"] += p["v"]
+            else:
+                fg = r.get("FGM/A*", "0/0").split("/")
+                ft = r.get("FTM/A*", "0/0").split("/")
+                T["fgm"] += f(fg[0]); T["fga"] += f(fg[1]); T["ftm"] += f(ft[0]); T["fta"] += f(ft[1])
+                for c in ["3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"]:
+                    T[c] += f(r.get(c))
+    return tot
+
+
+def load_proj(cfg, week, team_ids):
+    try:
+        cache = json.load(open(PROJ_CACHE, encoding="utf-8"))
+    except Exception:
+        cache = {}
+    key = f'{cfg["id"]}-w{week}'
+    c = cache.get(key)
+    if c and time.time() - c["ts"] < PROJ_MAX_AGE_H * 3600:
+        return c["tot"], c["asof"]
+    tot = project_league(cfg, week, team_ids)
+    asof = dt.datetime.now(KST).strftime("%m-%d %H:%M")
+    cache = {k: v for k, v in cache.items() if not k.startswith(cfg["id"] + "-w")}
+    cache[key] = {"ts": time.time(), "asof": asof, "tot": tot}
+    json.dump(cache, open(PROJ_CACHE, "w", encoding="utf-8"), ensure_ascii=False)
+    return tot, asof
+
+
+def combine_cat(stats, rem):
+    """실제 누적 + 남은 예상 → 최종 예상 카테고리"""
+    def pair(v):
+        try:
+            a, b = str(v).split("/")
+            return f(a), f(b)
+        except ValueError:
+            return 0.0, 0.0
+    stats = stats or {}
+    fgm, fga = pair(stats.get("FGM/A*", "0/0"))
+    ftm, fta = pair(stats.get("FTM/A*", "0/0"))
+    fgm += rem["fgm"]; fga += rem["fga"]; ftm += rem["ftm"]; fta += rem["fta"]
+    out = {"FG%": round(fgm / fga, 3) if fga else 0, "FT%": round(ftm / fta, 3) if fta else 0}
+    for c in ["3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"]:
+        out[c] = round(f(stats.get(c, 0)) + rem[c], 1)
+    return out
+
+
+def close_call(c, x, y):
+    if c in ("FG%", "FT%"):
+        return abs(x - y) < 0.01
+    return abs(x - y) <= max(1.5, 0.05 * max(abs(x), abs(y)))
+
+
+def add_projection(cfg, data):
+    ids = sorted({t["id"] for mu in data["matchups"] for t in mu["teams"]}, key=int)
+    try:
+        tot, asof = load_proj(cfg, data["week"], ids)
+    except Exception as e:
+        print("예상치 실패", cfg["id"], e)
+        return
+    tot = {str(k): v for k, v in tot.items()}
+    data["proj_asof"] = asof
+    for mu in data["matchups"]:
+        a, b = mu["teams"]
+        if cfg.get("type") == "points":
+            for t in (a, b):
+                t["pproj"] = round(f(t.get("score")) + tot[t["id"]]["fp"], 1)
+                t["prem_games"] = tot[t["id"]]["games"]
+            continue
+        pa, pb = combine_cat(a.get("stats"), tot[a["id"]]), combine_cat(b.get("stats"), tot[b["id"]])
+        a["pstats"], b["pstats"] = pa, pb
+        a["prem_games"], b["prem_games"] = tot[a["id"]]["games"], tot[b["id"]]["games"]
+        pc = cat_result(pa, pb)
+        mu["pcats"] = pc
+        mu["pclose"] = [c for c in CATS if pc[c] in ("a", "b") and close_call(c, pa[c], pb[c])]
+        a["pcw"] = sum(v == "a" for v in pc.values())
+        b["pcw"] = sum(v == "b" for v in pc.values())
+
+
 def league(cfg):
     lid = cfg["id"]
     home = get(BASE + lid)
@@ -172,9 +367,12 @@ def league(cfg):
             t = sum(v == "tie" for v in mu["cats"].values())
             a["cw"], b["cw"], mu["ties"] = w, l, t
     tx = parse_transactions(home)
-    return {"id": lid, "name": cfg["name"], "type": cfg.get("type", "cat"), "url": BASE + lid,
-            "week": week, "status": status,
-            "matchups": mus, "standings": parse_standings(home, lid), "transactions": tx}
+    out = {"id": lid, "name": cfg["name"], "type": cfg.get("type", "cat"), "url": BASE + lid,
+           "week": week, "status": status,
+           "matchups": mus, "standings": parse_standings(home, lid), "transactions": tx}
+    if status != "Final":
+        add_projection(cfg, out)
+    return out
 
 
 def main():

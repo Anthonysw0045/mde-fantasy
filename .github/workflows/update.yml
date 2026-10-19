@@ -1,22 +1,37 @@
 name: update-data
 on:
   schedule:
-    - cron: "*/15 * * * *"   # 15분마다 (GitHub 사정으로 몇 분 지연될 수 있음)
+    - cron: "2-59/5 * * * *"   # 5분마다 (정각 혼잡 피해 2분 오프셋, GitHub 사정으로 지연될 수 있음)
   workflow_dispatch:
+  push:
+    branches: [main]
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      # 예상치 캐시(무거운 계산은 4시간마다만) — 실행 간 유지
+      - uses: actions/cache@v4
+        with:
+          path: docs/proj_cache.json
+          key: proj-${{ github.run_id }}
+          restore-keys: proj-
       - run: python build.py
-      - name: commit if changed
-        run: |
-          git config user.name "mde-bot"
-          git config user.email "mde-bot@users.noreply.github.com"
-          git add docs/data.json
-          git diff --cached --quiet || (git commit -m "data: $(date -u +%FT%TZ)" && git push)
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deploy
+        uses: actions/deploy-pages@v4

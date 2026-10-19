@@ -71,6 +71,12 @@ a{color:inherit}
 .pts{font-size:22px;font-weight:700;color:var(--muted)} .pts.lead{color:var(--a)}
 .tag{display:inline-block;font-size:11px;padding:1px 6px;border-radius:5px;background:var(--line)}
 .tag.a{background:var(--a-soft);color:var(--a)} .tag.b{background:var(--b-soft);color:var(--b)}
+.edge{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;margin-top:10px;padding:8px 10px;border-radius:10px;background:var(--bg);font-size:13px}
+.edge span{color:var(--muted);font-size:12px} .edge em{font-style:normal;font-weight:700}
+.edge.a b,.edge.a em{color:var(--a)} .edge.b b,.edge.b em{color:var(--b)}
+.edge i{font-style:normal;color:var(--muted);font-size:12px;width:100%}
+.cat.pj{opacity:.75} .cat.cl{outline:1px dashed var(--muted);outline-offset:-2px}
+.stbl td.mu{color:var(--muted)}
 footer{color:var(--muted);font-size:12px;text-align:center;margin:20px 0 8px}
 @media (max-width:420px){.cats{grid-template-columns:repeat(9,1fr);gap:2px}.cat{font-size:9px}.cat b{font-size:10px}.score{font-size:21px}.tn{font-size:13px}}
 </style>
@@ -88,7 +94,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin:20px 0 8px}
     <button data-v="tx">거래 기록</button>
   </div>
   <main id="main"></main>
-  <footer>데이터: Yahoo Fantasy 공개 리그 · 약 15분마다 자동 갱신</footer>
+  <footer>데이터: Yahoo Fantasy 공개 리그 · 점수 약 5분 / 예상 우세 약 4시간마다 갱신</footer>
 </div>
 <script>
 const CATS=["FG%","FT%","3PTM","PTS","REB","AST","ST","BLK","TO"];
@@ -114,7 +120,7 @@ function render(){
   document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.v==S.view));
   const L=d.leagues[S.lg], M=document.getElementById("main");
   if(L.error){M.innerHTML=`<div class="card err">${esc(L.name)} — 불러오기 실패: ${esc(L.error)}</div>`;return}
-  const meta=`<div class="meta"><span><b>${L.week?L.week+"주차":""}</b> <span class="pill">${esc(stLabel(L.status))}</span></span><a href="${esc(L.url)}" target="_blank" rel="noopener">Yahoo에서 보기 ↗</a></div>`;
+  const meta=`<div class="meta"><span><b>${L.week?L.week+"주차":""}</b> <span class="pill">${esc(stLabel(L.status))}</span></span><a href="${esc(L.url)}" target="_blank" rel="noopener">Yahoo에서 보기 ↗</a></div>`+(L.proj_asof&&S.view=="mu"?`<p class="note" style="margin-top:-4px">예상 우세 = 양 팀 모두 남은 경기에 가능한 선수를 전원 출전시킨다고 가정 (Yahoo 일일 예상치 합산 + 현재 실제 기록 · 계산 ${esc(L.proj_asof)} KST)</p>`:"");
   if(S.view=="mu") M.innerHTML=meta+L.matchups.map(L.type=="points"?muPts:mu).join("");
   else if(S.view=="st") M.innerHTML=meta+standings(L);
   else M.innerHTML=meta+(L.transactions.length?`<div class="card"><ul class="tx">${L.transactions.map(txItem).join("")}</ul></div><p class="note">최근 거래만 표시 · 시각은 Yahoo 표기(미국 시간)</p>`:`<div class="card note">아직 거래 기록이 없습니다.</div>`);
@@ -122,17 +128,25 @@ function render(){
 function teamHtml(t,right){
   return `<div class="team ${right?"r":""}"><img src="${esc(t.logo)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div style="min-width:0"><div class="tn">${esc(t.name)}</div><div class="rec">${esc(t.record)}</div></div></div>`;
 }
+function edge(name,cls,score,close){
+  return `<div class="edge ${cls}"><span>예상 우세</span><b>${esc(name)}</b><em>${esc(score)}</em>${close&&close.length?`<i>접전: ${close.map(k=>LBL[k]||k).join(" · ")}</i>`:""}</div>`;
+}
 function mu(m){
-  const [a,b]=m.teams, c=m.cats||{};
+  const [a,b]=m.teams, c=m.cats||{}, pc=m.pcats||{};
   const started=Object.values(c).some(v=>v);
   const sc=started?`<span class="x">${a.cw}</span><span class="d">-</span><span class="y">${b.cw}</span>${m.ties?`<div class="rec">무 ${m.ties}</div>`:""}`:`<span class="d">vs</span>`;
-  const chips=CATS.map(k=>{const w=c[k];const av=(a.stats||{})[k]??"-",bv=(b.stats||{})[k]??"-";
-    return `<div class="cat ${w=="a"?"a":w=="b"?"b":""}" title="${esc(av)} : ${esc(bv)}"><b>${LBL[k]||k}</b>${w=="a"?"◀":w=="b"?"▶":w=="tie"?"=":"·"}</div>`}).join("");
-  const rows=["FGM/A*","FTM/A*",...CATS].map(k=>{const av=(a.stats||{})[k]??"-",bv=(b.stats||{})[k]??"-",w=c[k];
-    return `<tr><td class="${w=="a"?"w":""}">${esc(av)}</td><th>${(LBL[k]||k).replace("*","")}</th><td class="${w=="b"?"w":""}">${esc(bv)}</td></tr>`}).join("");
+  const chips=CATS.map(k=>{const w=started?c[k]:pc[k];const close=(m.pclose||[]).includes(k);
+    return `<div class="cat ${w=="a"?"a":w=="b"?"b":""} ${started?"":"pj"} ${close?"cl":""}"><b>${LBL[k]||k}</b>${w=="a"?"◀":w=="b"?"▶":w=="tie"?"=":"·"}</div>`}).join("");
+  const fmt=(k,v)=>v==null||v===""?"-":(k=="FG%"||k=="FT%")&&typeof v=="number"?v.toFixed(3).replace(/^0/,""):v;
+  const rows=CATS.map(k=>{const w=pc[k];
+    return `<tr><td class="${w=="a"?"w":""}">${fmt(k,(a.pstats||{})[k])}</td><td class="mu">${esc((a.stats||{})[k]??"-")}</td><th>${LBL[k]||k}</th><td class="mu">${esc((b.stats||{})[k]??"-")}</td><td class="${w=="b"?"w":""}">${fmt(k,(b.pstats||{})[k])}</td></tr>`}).join("");
+  let ed="";
+  if(m.pcats){const pa=a.pcw,pb=b.pcw;
+    ed=pa==pb?edge("박빙","",`${pa}-${pb}`,m.pclose):edge(pa>pb?a.name:b.name,pa>pb?"a":"b",`${Math.max(pa,pb)}-${Math.min(pa,pb)}`,m.pclose);}
+  const gm=a.prem_games!=null?`<div class="rec" style="margin-top:6px">남은 출전 예상 ${a.prem_games}경기 : ${b.prem_games}경기</div>`:"";
   return `<div class="card"><div class="vs">${teamHtml(a)}<div class="score">${sc}</div>${teamHtml(b,true)}</div>
-    <div class="cats">${chips}</div>
-    <details><summary>카테고리 상세</summary><table class="stbl">${rows}</table></details></div>`;
+    <div class="cats">${chips}</div>${ed}${gm}
+    <details><summary>카테고리 상세 (예상 최종 / 현재)</summary><table class="stbl"><tr><th>예상</th><th>현재</th><th></th><th>현재</th><th>예상</th></tr>${rows}</table></details></div>`;
 }
 const KIND={add:["영입","a"],drop:["방출","b"],trade:["트레이드",""],etc:["",""]};
 function txItem(t){
@@ -141,11 +155,13 @@ function txItem(t){
 }
 function muPts(m){
   const [a,b]=m.teams, x=parseFloat(a.score)||0, y=parseFloat(b.score)||0, started=x>0||y>0;
-  const lead=started?(x>y?"a":y>x?"b":""):((parseFloat(a.proj)||0)>(parseFloat(b.proj)||0)?"pa":"pb");
-  const side=(t,k,r)=>`<div style="text-align:${r?"right":"left"}"><div class="pts ${lead==k?"lead":""}">${esc(t.score||"0")}</div><div class="rec">예상 ${esc(t.proj||"-")}</div></div>`;
+  const lead=started?(x>y?"a":y>x?"b":""):"";
+  const pa=a.pproj, pb=b.pproj, hasP=pa!=null&&pb!=null;
+  const num=v=>v==null?"-":Number(v).toLocaleString("ko-KR",{maximumFractionDigits:1});
+  const side=(t,k,r)=>`<div style="text-align:${r?"right":"left"}"><div class="pts ${lead==k?"lead":""}">${esc(t.score||"0")}</div><div class="rec">${hasP?`예상 최종 ${num(t.pproj)} · 남은 ${t.prem_games}경기`:`Yahoo 예상 ${esc(t.proj||"-")}`}</div></div>`;
+  const ed=hasP?(pa==pb?edge("박빙","","±0"):edge(pa>pb?a.name:b.name,pa>pb?"a":"b",`+${num(Math.abs(pa-pb))}점`)):"";
   return `<div class="card"><div class="vs">${teamHtml(a)}<div class="score"><span class="d">vs</span></div>${teamHtml(b,true)}</div>
-    <div class="vs" style="margin-top:8px">${side(a,"a")}<div></div>${side(b,"b",1)}</div>
-    ${!started?`<div class="note" style="margin:6px 0 0">예상 우세: ${esc((lead=="pa"?a:b).name)}</div>`:""}</div>`;
+    <div class="vs" style="margin-top:8px">${side(a,"a")}<div></div>${side(b,"b",1)}</div>${ed}</div>`;
 }
 function standings(L){
   const ranked=L.standings.some(t=>t.rank);

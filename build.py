@@ -23,7 +23,6 @@ UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.3
 KST = dt.timezone(dt.timedelta(hours=9))
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "docs", "data.json")
 PROJ_CACHE = os.path.join(os.path.dirname(OUT), "proj_cache.json")
-PROJ_MAX_AGE_H = 4          # 예상치는 무거움(팀×날짜 페이지) → 4시간마다만 재계산
 ET = ZoneInfo("America/New_York")
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -285,22 +284,80 @@ def project_league(cfg, week, team_ids):
     return tot
 
 
-def load_proj(cfg, week, team_ids):
+PAGES_CACHE_URL = "https://anthonysw0045.github.io/mde-fantasy/proj_cache.json"
+
+
+def read_cache():
+    """주간 예상·적중 기록 저장소. Actions 캐시가 유실되면 배포된 페이지의 사본에서 복구"""
     try:
-        cache = json.load(open(PROJ_CACHE, encoding="utf-8"))
+        return json.load(open(PROJ_CACHE, encoding="utf-8"))
     except Exception:
-        cache = {}
-    # 시작일이 바뀌면(매일 ET 19시 = KST 08시, 서머타임 종료 후 09시) 4시간 안 됐어도 재계산
-    key = f'{cfg["id"]}-w{week}-{proj_start().isoformat()}'
+        pass
+    try:
+        return json.loads(get(PAGES_CACHE_URL, tries=1))
+    except Exception:
+        return {}
+
+
+def write_cache(cache):
+    json.dump(cache, open(PROJ_CACHE, "w", encoding="utf-8"), ensure_ascii=False)
+
+
+def load_proj(cfg, week, team_ids):
+    """주간 예상 = 해당 주차를 처음 본 시점(주차 시작 전)에 한 번 작성하고 끝까지 고정.
+    (형님 지시 2026-10-19: '맨 처음 주간 예상'과 '주차 결과'를 비교하기 위함 → 재계산 금지)"""
+    cache = read_cache()
+    key = f'{cfg["id"]}-w{week}'
     c = cache.get(key)
-    if c and time.time() - c["ts"] < PROJ_MAX_AGE_H * 3600:
+    if c:
         return c["tot"], c["asof"]
     tot = project_league(cfg, week, team_ids)
     asof = dt.datetime.now(KST).strftime("%m-%d %H:%M")
-    cache = {k: v for k, v in cache.items() if not k.startswith(cfg["id"] + "-w")}
     cache[key] = {"ts": time.time(), "asof": asof, "tot": tot}
-    json.dump(cache, open(PROJ_CACHE, "w", encoding="utf-8"), ensure_ascii=False)
+    write_cache(cache)
     return tot, asof
+
+
+def proj_pair(cfg, tot, aid, bid):
+    """두 팀의 주간 예상 비교 → (예상 a, 예상 b, 상세)"""
+    ta, tb = tot[str(aid)], tot[str(bid)]
+    if cfg.get("type") == "points":
+        return round(ta["fp"], 1), round(tb["fp"], 1), {}
+    pa, pb = combine_cat(None, ta), combine_cat(None, tb)
+    pc = cat_result(pa, pb)
+    return (sum(v == "a" for v in pc.values()), sum(v == "b" for v in pc.values()),
+            {"pa": pa, "pb": pb, "pc": pc,
+             "close": [c for c in CATS if pc[c] in ("a", "b") and close_call(c, pa[c], pb[c])]})
+
+
+def record_history(cfg, cur_week):
+    """끝난 주차마다 '처음 주간 예상' vs '실제 결과' 기록 (한 번만 기록, 이후 고정)"""
+    lid = cfg["id"]
+    cache = read_cache()
+    hist = cache.setdefault("hist", {}).setdefault(lid, {})
+    changed = False
+    for key in sorted(k for k in cache if re.fullmatch(lid + r"-w\d+", k)):
+        w = int(key.split("-w")[1])
+        if w >= cur_week or str(w) in hist:
+            continue
+        try:
+            wk, status, mus = parse_matchups(get(f"{BASE}{lid}?matchup_week={w}&module=matchups&lhst=matchups"), lid)
+        except Exception as e:
+            print("결과 수집 실패", lid, w, e)
+            continue
+        rows = []
+        for mu in mus:
+            a, b = mu["teams"]
+            pa, pb, _ = proj_pair(cfg, cache[key]["tot"], a["id"], b["id"])
+            ra, rb = f(a["score"]), f(b["score"])
+            pw = "a" if pa > pb else "b" if pb > pa else "tie"
+            rw = "a" if ra > rb else "b" if rb > ra else "tie"
+            rows.append({"a": a["name"], "b": b["name"], "proj": [pa, pb], "result": [ra, rb], "hit": pw == rw})
+        hist[str(w)] = {"asof": cache[key]["asof"], "rows": rows}
+        changed = True
+    if changed:
+        write_cache(cache)
+    return hist
 
 
 def combine_cat(stats, rem):
@@ -336,21 +393,17 @@ def add_projection(cfg, data):
         return
     tot = {str(k): v for k, v in tot.items()}
     data["proj_asof"] = asof
+    # 주간 예상은 실제 기록과 섞지 않는다 (실제 점수는 매치업 stats/score 로 별도 표시)
     for mu in data["matchups"]:
         a, b = mu["teams"]
-        if cfg.get("type") == "points":
-            for t in (a, b):
-                t["pproj"] = round(f(t.get("score")) + tot[t["id"]]["fp"], 1)
-                t["prem_games"] = tot[t["id"]]["games"]
-            continue
-        pa, pb = combine_cat(a.get("stats"), tot[a["id"]]), combine_cat(b.get("stats"), tot[b["id"]])
-        a["pstats"], b["pstats"] = pa, pb
+        x, y, det = proj_pair(cfg, tot, a["id"], b["id"])
         a["prem_games"], b["prem_games"] = tot[a["id"]]["games"], tot[b["id"]]["games"]
-        pc = cat_result(pa, pb)
-        mu["pcats"] = pc
-        mu["pclose"] = [c for c in CATS if pc[c] in ("a", "b") and close_call(c, pa[c], pb[c])]
-        a["pcw"] = sum(v == "a" for v in pc.values())
-        b["pcw"] = sum(v == "b" for v in pc.values())
+        if cfg.get("type") == "points":
+            a["pproj"], b["pproj"] = x, y
+            continue
+        a["pstats"], b["pstats"] = det["pa"], det["pb"]
+        mu["pcats"], mu["pclose"] = det["pc"], det["close"]
+        a["pcw"], b["pcw"] = x, y
 
 
 def league(cfg):
@@ -376,8 +429,11 @@ def league(cfg):
     out = {"id": lid, "name": cfg["name"], "type": cfg.get("type", "cat"), "url": BASE + lid,
            "week": week, "status": status,
            "matchups": mus, "standings": parse_standings(home, lid), "transactions": tx}
-    if status != "Final":
-        add_projection(cfg, out)
+    add_projection(cfg, out)  # 고정된 주간 예상 (끝난 주차도 그대로 표시)
+    try:
+        out["history"] = record_history(cfg, week)
+    except Exception as e:
+        print("적중 기록 실패", lid, e)
     return out
 
 

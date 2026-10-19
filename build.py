@@ -377,6 +377,10 @@ def league(cfg):
 
 def main():
     data = {"updated": dt.datetime.now(KST).strftime("%Y-%m-%d %H:%M KST"), "leagues": []}
+    try:  # 화면 버전 → 옛 화면이 캐시된 브라우저가 스스로 새로고침하도록
+        data["page_ver"] = re.search(r'PAGE_VER="([^"]+)"', open(os.path.join(os.path.dirname(OUT), "index.html"), encoding="utf-8").read()).group(1)
+    except Exception:
+        pass
     for cfg in LEAGUES:
         try:
             data["leagues"].append(league(cfg))

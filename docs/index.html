@@ -97,6 +97,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin:20px 0 8px}
   <footer>데이터: Yahoo Fantasy 공개 리그 · 점수 약 5분 / 예상 우세 약 4시간마다 갱신</footer>
 </div>
 <script>
+const PAGE_VER="20261019-2";  // 화면 수정 시 올림 → 옛 화면이 캐시된 폰은 자동 새로고침
 const CATS=["FG%","FT%","3PTM","PTS","REB","AST","ST","BLK","TO"];
 const LBL={"3PTM":"3PM"};
 const S={data:null,lg:0,view:"mu"};
@@ -108,7 +109,9 @@ const stLabel=s=>({"Not started yet":"시작 전","In progress":"진행 중","Fi
 async function load(){
   try{
     const r=await fetch("data.json?t="+Date.now(),{cache:"no-store"});
-    S.data=await r.json(); render();
+    S.data=await r.json();
+    if(S.data.page_ver&&S.data.page_ver!==PAGE_VER&&!location.search.includes("v="+S.data.page_ver)){location.replace(location.pathname+"?v="+S.data.page_ver);return}
+    render();
   }catch(e){document.getElementById("main").innerHTML='<p class="err">데이터를 불러오지 못했습니다.</p>'}
 }
 function render(){

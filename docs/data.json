@@ -1,0 +1,509 @@
+{
+ "updated": "2026-10-19 11:00 KST",
+ "leagues": [
+  {
+   "id": "90403",
+   "name": "MDE Human League 2026-27",
+   "url": "https://basketball.fantasysports.yahoo.com/nba/90403",
+   "week": 1,
+   "status": "Not started yet",
+   "matchups": [
+    {
+     "teams": [
+      {
+       "id": "1",
+       "name": "[한별] 어머! 얜 잡아야해",
+       "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/56484795041_55d1aa.jpg",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      },
+      {
+       "id": "8",
+       "name": "jongsik's Bold Team",
+       "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-basketball-1-png_1721241298854.png",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      }
+     ],
+     "cats": {
+      "FG%": null,
+      "FT%": null,
+      "3PTM": null,
+      "PTS": null,
+      "REB": null,
+      "AST": null,
+      "ST": null,
+      "BLK": null,
+      "TO": null
+     },
+     "ties": 0
+    },
+    {
+     "teams": [
+      {
+       "id": "2",
+       "name": "[길훈] 개미사냥꾼",
+       "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/ad238898231cfb5bb68029df2160bd5296ee46bf51bca6d5d8b5eb4724722285.jpg",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      },
+      {
+       "id": "5",
+       "name": "[민호]필라는놔두라고",
+       "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/d86ee4596978900d99be157ec9c9590fb5e6b139e71dfe844f0128ea9ec7813f.jpg",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      }
+     ],
+     "cats": {
+      "FG%": null,
+      "FT%": null,
+      "3PTM": null,
+      "PTS": null,
+      "REB": null,
+      "AST": null,
+      "ST": null,
+      "BLK": null,
+      "TO": null
+     },
+     "ties": 0
+    },
+    {
+     "teams": [
+      {
+       "id": "3",
+       "name": "[덕호] 차차차",
+       "logo": "https://s.yimg.com/cv/apiv2/default/nba/nba_4.png",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      },
+      {
+       "id": "12",
+       "name": "[승완] 클로드는 열일중",
+       "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-rainbow-png_1721952390362.png",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      }
+     ],
+     "cats": {
+      "FG%": null,
+      "FT%": null,
+      "3PTM": null,
+      "PTS": null,
+      "REB": null,
+      "AST": null,
+      "ST": null,
+      "BLK": null,
+      "TO": null
+     },
+     "ties": 0
+    },
+    {
+     "teams": [
+      {
+       "id": "4",
+       "name": "[동한] 쌉싸라도스",
+       "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/dcb8f3a4b50fa84893c123468d2268beb84d890b19c582bc0a065f82476bef38.jpg",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      },
+      {
+       "id": "6",
+       "name": "[준식] 웸비야 해줘",
+       "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/37f62b3a2ef70f5c8bcbce81110de10b7b83f5eac8b312e1746ae29b855a783c.png",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      }
+     ],
+     "cats": {
+      "FG%": null,
+      "FT%": null,
+      "3PTM": null,
+      "PTS": null,
+      "REB": null,
+      "AST": null,
+      "ST": null,
+      "BLK": null,
+      "TO": null
+     },
+     "ties": 0
+    },
+    {
+     "teams": [
+      {
+       "id": "7",
+       "name": "[진규] 마지막 판타지_v2",
+       "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cba95099d9440b278b13b20e2337ebda015c6a04a24b0325c481a2ddf6dd455f.jpg",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      },
+      {
+       "id": "10",
+       "name": "[허규]형",
+       "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/9110f0f839fc8226bee8bfc1f66ca8c720f58c09fcfde805091841435da87ce0.jpg",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      }
+     ],
+     "cats": {
+      "FG%": null,
+      "FT%": null,
+      "3PTM": null,
+      "PTS": null,
+      "REB": null,
+      "AST": null,
+      "ST": null,
+      "BLK": null,
+      "TO": null
+     },
+     "ties": 0
+    },
+    {
+     "teams": [
+      {
+       "id": "9",
+       "name": "[홍재] 돌아온 홍몬스",
+       "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cf40dc59f028a0fd8a00ecb4d3614e7c7bd3da5225517440de4dcab21f463150.jpg",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      },
+      {
+       "id": "11",
+       "name": "박재현 /Park Chea Hyen Jay's Team",
+       "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-avatar-portrait-10-120-x-png_1728591621139.png",
+       "record": "0-0-0",
+       "score": "0",
+       "stats": {
+        "FGM/A*": "-/-",
+        "FTM/A*": "-/-",
+        "FG%": "-",
+        "FT%": "-",
+        "3PTM": "-",
+        "PTS": "-",
+        "REB": "-",
+        "AST": "-",
+        "ST": "-",
+        "BLK": "-",
+        "TO": "-"
+       },
+       "cw": 0
+      }
+     ],
+     "cats": {
+      "FG%": null,
+      "FT%": null,
+      "3PTM": null,
+      "PTS": null,
+      "REB": null,
+      "AST": null,
+      "ST": null,
+      "BLK": null,
+      "TO": null
+     },
+     "ties": 0
+    }
+   ],
+   "standings": [
+    {
+     "id": "1",
+     "rank": "",
+     "name": "[한별] 어머! 얜 잡아야해",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "1",
+     "moves": "-",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/56484795041_55d1aa.jpg"
+    },
+    {
+     "id": "2",
+     "rank": "",
+     "name": "[길훈] 개미사냥꾼",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "4",
+     "moves": "-",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/ad238898231cfb5bb68029df2160bd5296ee46bf51bca6d5d8b5eb4724722285.jpg"
+    },
+    {
+     "id": "3",
+     "rank": "",
+     "name": "[덕호] 차차차",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "8",
+     "moves": "-",
+     "logo": "https://s.yimg.com/cv/apiv2/default/nba/nba_4.png"
+    },
+    {
+     "id": "4",
+     "rank": "",
+     "name": "[동한] 쌉싸라도스",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "7",
+     "moves": "-",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/dcb8f3a4b50fa84893c123468d2268beb84d890b19c582bc0a065f82476bef38.jpg"
+    },
+    {
+     "id": "5",
+     "rank": "",
+     "name": "[민호]필라는놔두라고",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "9",
+     "moves": "-",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/d86ee4596978900d99be157ec9c9590fb5e6b139e71dfe844f0128ea9ec7813f.jpg"
+    },
+    {
+     "id": "6",
+     "rank": "",
+     "name": "[준식] 웸비야 해줘",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "11",
+     "moves": "-",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/37f62b3a2ef70f5c8bcbce81110de10b7b83f5eac8b312e1746ae29b855a783c.png"
+    },
+    {
+     "id": "7",
+     "rank": "",
+     "name": "[진규] 마지막 판타지_v2",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "10",
+     "moves": "-",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cba95099d9440b278b13b20e2337ebda015c6a04a24b0325c481a2ddf6dd455f.jpg"
+    },
+    {
+     "id": "8",
+     "rank": "",
+     "name": "jongsik's Bold Team",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "2",
+     "moves": "-",
+     "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-basketball-1-png_1721241298854.png"
+    },
+    {
+     "id": "9",
+     "rank": "",
+     "name": "[홍재] 돌아온 홍몬스",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "6",
+     "moves": "-",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cf40dc59f028a0fd8a00ecb4d3614e7c7bd3da5225517440de4dcab21f463150.jpg"
+    },
+    {
+     "id": "10",
+     "rank": "",
+     "name": "[허규]형",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "12",
+     "moves": "-",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/9110f0f839fc8226bee8bfc1f66ca8c720f58c09fcfde805091841435da87ce0.jpg"
+    },
+    {
+     "id": "11",
+     "rank": "",
+     "name": "박재현 /Park Chea Hyen Jay's Team",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "5",
+     "moves": "-",
+     "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-avatar-portrait-10-120-x-png_1728591621139.png"
+    },
+    {
+     "id": "12",
+     "rank": "",
+     "name": "[승완] 클로드는 열일중",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "0",
+     "last": "-",
+     "waiver": "3",
+     "moves": "-",
+     "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-rainbow-png_1721952390362.png"
+    }
+   ],
+   "transactions": []
+  }
+ ]
+}

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MDE 판타지 현황판</title>
+<meta name="description" content="MDE 판타지 농구 리그 실시간 매치업·순위">
+<meta property="og:title" content="MDE 판타지 현황판">
+<meta property="og:description" content="이번 주 매치업 · 카테고리 점수 · 순위 실시간">
+<style>
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#15181d; --muted:#6b7280; --line:#e5e7eb;
+  --a:#0a84ff; --a-soft:#e6f1ff; --b:#ff5a36; --b-soft:#ffece6; --tie:#9ca3af; --accent:#111827;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1116; --card:#171b22; --ink:#e8eaee; --muted:#9aa3af; --line:#262c36;
+    --a:#4ea1ff; --a-soft:#13243a; --b:#ff7a5c; --b-soft:#3a1c15; --tie:#6b7280; --accent:#e8eaee;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1116; --card:#171b22; --ink:#e8eaee; --muted:#9aa3af; --line:#262c36;
+  --a:#4ea1ff; --a-soft:#13243a; --b:#ff7a5c; --b-soft:#3a1c15; --tie:#6b7280; --accent:#e8eaee;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header h1{font-size:20px;margin:4px 0 2px}
+header .sub{color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:14px 0 6px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;border-radius:999px;font-size:14px;white-space:nowrap;cursor:pointer}
+.tabs button.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.seg{display:flex;gap:4px;margin:8px 0 12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:3px}
+.seg button{flex:1;border:0;background:transparent;color:var(--muted);padding:7px 0;border-radius:8px;font-size:14px;cursor:pointer}
+.seg button.on{background:var(--bg);color:var(--ink);font-weight:600}
+.meta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin:6px 2px 10px}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--line);color:var(--ink);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+.team{display:flex;align-items:center;gap:8px;min-width:0}
+.team.r{flex-direction:row-reverse;text-align:right}
+.team img{width:34px;height:34px;border-radius:50%;flex:none;background:var(--line)}
+.tn{font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rec{color:var(--muted);font-size:12px}
+.score{font-size:24px;font-weight:700;letter-spacing:1px;text-align:center;white-space:nowrap}
+.score .x{color:var(--a)} .score .y{color:var(--b)} .score .d{color:var(--muted);font-size:16px;margin:0 4px}
+.cats{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;margin-top:10px}
+.cat{text-align:center;border-radius:6px;padding:4px 0 3px;background:var(--bg);font-size:10px;color:var(--muted)}
+.cat b{display:block;font-size:11px;color:var(--ink);font-weight:600}
+.cat.a{background:var(--a-soft)} .cat.a b{color:var(--a)}
+.cat.b{background:var(--b-soft)} .cat.b b{color:var(--b)}
+details{margin-top:8px} summary{cursor:pointer;color:var(--muted);font-size:12px}
+.stbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+.stbl td,.stbl th{padding:4px 2px;text-align:center;border-bottom:1px solid var(--line)}
+.stbl th{color:var(--muted);font-weight:500}
+.stbl td.w{font-weight:700}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:12px;color:var(--muted);font-weight:500;text-align:center;padding:6px 4px;border-bottom:1px solid var(--line)}
+.tbl td{padding:8px 4px;border-bottom:1px solid var(--line);text-align:center;font-size:14px}
+.tbl td.nm{text-align:left;max-width:0;width:50%}
+.tbl td.nm div{display:flex;align-items:center;gap:8px;overflow:hidden}
+.tbl td.nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tbl img{width:24px;height:24px;border-radius:50%;flex:none}
+.rk{font-weight:700;width:28px}
+.po td{background:color-mix(in srgb,var(--a-soft) 55%,transparent)}
+.note{color:var(--muted);font-size:12px;margin:8px 2px}
+.tx{list-style:none;padding:0;margin:0}
+.tx li{padding:9px 2px;border-bottom:1px solid var(--line);font-size:13px}
+.err{color:var(--b)}
+a{color:inherit}
+footer{color:var(--muted);font-size:12px;text-align:center;margin:20px 0 8px}
+@media (max-width:420px){.cats{grid-template-columns:repeat(9,1fr);gap:2px}.cat{font-size:9px}.cat b{font-size:10px}.score{font-size:21px}.tn{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🏀 MDE 판타지 현황판</h1>
+    <div class="sub" id="upd">불러오는 중…</div>
+  </header>
+  <nav class="tabs" id="tabs"></nav>
+  <div class="seg" id="seg">
+    <button data-v="mu" class="on">이번 주 매치업</button>
+    <button data-v="st">순위</button>
+    <button data-v="tx">거래 기록</button>
+  </div>
+  <main id="main"></main>
+  <footer>데이터: Yahoo Fantasy 공개 리그 페이지 · 약 15분마다 자동 갱신</footer>
+</div>
+<script>
+const CATS=["FG%","FT%","3PTM","PTS","REB","AST","ST","BLK","TO"];
+const LBL={"3PTM":"3PM"};
+const S={data:null,lg:0,view:"mu"};
+try{const q=JSON.parse(localStorage.getItem("mde_ui")||"{}");Object.assign(S,{lg:q.lg||0,view:q.view||"mu"})}catch(e){}
+const save=()=>{try{localStorage.setItem("mde_ui",JSON.stringify({lg:S.lg,view:S.view}))}catch(e){}};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const stLabel=s=>({"Not started yet":"시작 전","In progress":"진행 중","Final":"종료"}[s]||s||"");
+
+async function load(){
+  try{
+    const r=await fetch("data.json?t="+Date.now(),{cache:"no-store"});
+    S.data=await r.json(); render();
+  }catch(e){document.getElementById("main").innerHTML='<p class="err">데이터를 불러오지 못했습니다.</p>'}
+}
+function render(){
+  const d=S.data; if(!d) return;
+  if(S.lg>=d.leagues.length) S.lg=0;
+  document.getElementById("upd").textContent="마지막 갱신 "+d.updated;
+  document.getElementById("tabs").innerHTML=d.leagues.map((l,i)=>`<button class="${i==S.lg?"on":""}" data-i="${i}">${esc(l.name)}</button>`).join("");
+  document.getElementById("tabs").style.display=d.leagues.length>1?"flex":"none";
+  document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.v==S.view));
+  const L=d.leagues[S.lg], M=document.getElementById("main");
+  if(L.error){M.innerHTML=`<div class="card err">${esc(L.name)} — 불러오기 실패: ${esc(L.error)}</div>`;return}
+  const meta=`<div class="meta"><span><b>${L.week?L.week+"주차":""}</b> <span class="pill">${esc(stLabel(L.status))}</span></span><a href="${esc(L.url)}" target="_blank" rel="noopener">Yahoo에서 보기 ↗</a></div>`;
+  if(S.view=="mu") M.innerHTML=meta+L.matchups.map(mu).join("");
+  else if(S.view=="st") M.innerHTML=meta+standings(L);
+  else M.innerHTML=meta+(L.transactions.length?`<div class="card"><ul class="tx">${L.transactions.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>`:`<div class="card note">아직 거래 기록이 없습니다.</div>`);
+}
+function teamHtml(t,right){
+  return `<div class="team ${right?"r":""}"><img src="${esc(t.logo)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div style="min-width:0"><div class="tn">${esc(t.name)}</div><div class="rec">${esc(t.record)}</div></div></div>`;
+}
+function mu(m){
+  const [a,b]=m.teams, c=m.cats||{};
+  const started=Object.values(c).some(v=>v);
+  const sc=started?`<span class="x">${a.cw}</span><span class="d">-</span><span class="y">${b.cw}</span>${m.ties?`<div class="rec">무 ${m.ties}</div>`:""}`:`<span class="d">vs</span>`;
+  const chips=CATS.map(k=>{const w=c[k];const av=(a.stats||{})[k]??"-",bv=(b.stats||{})[k]??"-";
+    return `<div class="cat ${w=="a"?"a":w=="b"?"b":""}" title="${esc(av)} : ${esc(bv)}"><b>${LBL[k]||k}</b>${w=="a"?"◀":w=="b"?"▶":w=="tie"?"=":"·"}</div>`}).join("");
+  const rows=["FGM/A*","FTM/A*",...CATS].map(k=>{const av=(a.stats||{})[k]??"-",bv=(b.stats||{})[k]??"-",w=c[k];
+    return `<tr><td class="${w=="a"?"w":""}">${esc(av)}</td><th>${(LBL[k]||k).replace("*","")}</th><td class="${w=="b"?"w":""}">${esc(bv)}</td></tr>`}).join("");
+  return `<div class="card"><div class="vs">${teamHtml(a)}<div class="score">${sc}</div>${teamHtml(b,true)}</div>
+    <div class="cats">${chips}</div>
+    <details><summary>카테고리 상세</summary><table class="stbl">${rows}</table></details></div>`;
+}
+function standings(L){
+  const ranked=L.standings.some(t=>t.rank);
+  const rows=L.standings.map((t,i)=>`<tr class="${ranked&&i<6?"po":""}"><td class="rk">${esc(t.rank||"-")}</td><td class="nm"><div><img src="${esc(t.logo)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>${esc(t.name)}</span></div></td><td>${esc(t.wlt)}</td><td>${esc(t.gb)}</td><td>${esc(t.waiver)}</td><td>${esc(t.moves)}</td></tr>`).join("");
+  return `<div class="card" style="padding:6px 8px"><table class="tbl"><thead><tr><th>#</th><th style="text-align:left">팀</th><th>승-패-무</th><th>GB</th><th>웨이버</th><th>영입</th></tr></thead><tbody>${rows}</tbody></table></div>
+  <p class="note">${ranked?"음영 = 플레이오프권(상위 6팀) · ":"시즌 시작 전 — 순위 미정 · "}웨이버 = 우선순위(1이 최우선)</p>`;
+}
+document.getElementById("tabs").onclick=e=>{const b=e.target.closest("button");if(b){S.lg=+b.dataset.i;save();render()}};
+document.getElementById("seg").onclick=e=>{const b=e.target.closest("button");if(b){S.view=b.dataset.v;save();render()}};
+load(); setInterval(load,5*60*1000);
+</script>
+</body>
+</html>

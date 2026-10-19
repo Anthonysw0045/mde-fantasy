@@ -87,6 +87,10 @@ a{color:inherit}
 .htbl td,.htbl th{font-size:13px}.htbl td.nm2{text-align:left;font-size:13px;line-height:1.3}
 .ok{color:#22c55e;font-weight:700}.no{color:var(--b);font-weight:700}
 .hs{display:flex;align-items:baseline;gap:10px}.hs b{font-size:22px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}.rgrid .card{margin:0}
+.rtbl{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}.rtbl td{padding:4px 3px;border-bottom:1px solid var(--line)}
+.rtbl td.sl{width:34px;color:var(--muted);font-size:11px}.rtbl td.pn{font-weight:500}
+.rtbl tr.bn td.pn,.rtbl tr.il td.pn{color:var(--muted);font-weight:400}
 .edge{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;margin-top:10px;padding:8px 10px;border-radius:10px;background:var(--bg);font-size:13px}
 .edge span{color:var(--muted);font-size:12px} .edge em{font-style:normal;font-weight:700}
 .edge.a b,.edge.a em{color:var(--a)} .edge.b b,.edge.b em{color:var(--b)}
@@ -108,13 +112,14 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin:20px 0 8px}
     <button data-v="mu" class="on">이번 주 매치업</button>
     <button data-v="st">순위</button>
     <button data-v="hx">예상 적중</button>
+    <button data-v="ro">로스터</button>
     <button data-v="tx">거래 기록</button>
   </div>
   <main id="main"></main>
   <footer>데이터: Yahoo Fantasy 공개 리그 · 실제 점수 약 5분마다 갱신 · 주간 예상은 주차 시작 전 작성</footer>
 </div>
 <script>
-const PAGE_VER="20261019-5";  // 화면 수정 시 올림 → 옛 화면이 캐시된 폰은 자동 새로고침
+const PAGE_VER="20261019-6";  // 화면 수정 시 올림 → 옛 화면이 캐시된 폰은 자동 새로고침
 const CATS=["FG%","FT%","3PTM","PTS","REB","AST","ST","BLK","TO"];
 const LBL={"3PTM":"3PM"};
 const S={data:null,lg:0,view:"mu"};
@@ -144,6 +149,7 @@ function render(){
   if(S.view=="mu") M.innerHTML=meta+L.matchups.map(L.type=="points"?muPts:mu).join("");
   else if(S.view=="st") M.innerHTML=meta+standings(L);
   else if(S.view=="hx") M.innerHTML=meta+history(L);
+  else if(S.view=="ro") M.innerHTML=meta+rosters(L);
   else M.innerHTML=meta+(L.transactions.length?`<div class="card"><ul class="tx">${L.transactions.map(txItem).join("")}</ul></div><p class="note">최근 거래만 표시 · 시각은 Yahoo 표기(미국 시간)</p>`:`<div class="card note">아직 거래 기록이 없습니다.</div>`);
 }
 function teamHtml(t,right){
@@ -189,9 +195,10 @@ function muPts(m){
   const sc=started?`<span class="x">${num(x)}</span><span class="d">-</span><span class="y">${num(y)}</span>`:`<span class="d">vs</span>`;
   const live=started?blk("현재 · 실제 경기","live",`${num(x)} - ${num(y)}`,leadName(x,y,a,b),"")
                     :blk("현재 · 실제 경기","live",`<span class="mutedtxt">경기 시작 전</span>`,"","");
-  const pj=hasP?blk("주간 예상 · 주차 시작 전 작성","proj",`${num(pa)} - ${num(pb)}`,
+  const stl=(t)=>(t.pstarters||[]).map(p=>`${esc(p.name)} ${num(p.v)}${p.n?` (${p.n}경기)`:""}`).join(" · ");
+  const pj=hasP?blk("주간 예상 · 주차 시작 전 작성 · 최고 1경기 규칙","proj",`${num(pa)} - ${num(pb)}`,
       pa==pb?`<span>박빙</span>`:`<span class="${pa>pb?"ca":"cb"}">${esc(pa>pb?a.name:b.name)} +${num(Math.abs(pa-pb))}점</span>`,"",
-      `<div class="rec bf">풀 출전 가정 · 출전 ${a.prem_games} : ${b.prem_games}경기</div>`)
+      (a.pstarters?`<details class="bf"><summary>예상 주전 6명과 기대 최고점</summary><div class="rec" style="margin-top:4px"><b>${esc(a.name)}</b>: ${stl(a)}</div><div class="rec" style="margin-top:4px"><b>${esc(b.name)}</b>: ${stl(b)}</div></details>`:""))
     :blk("예상 (Yahoo)","proj",`${esc(a.proj||"-")} - ${esc(b.proj||"-")}`,"","");
   return `<div class="card"><div class="vs">${teamHtml(a)}<div class="score">${sc}</div>${teamHtml(b,true)}</div>${live}${pj}</div>`;
 }
@@ -212,6 +219,13 @@ function history(L){
     return `<div class="card"><div class="hh"><b>${w}주차</b><span class="rec">예상 작성 ${esc(h.asof)}</span><span class="pill">적중 ${k}/${n}</span></div><table class="tbl htbl">${head}${h.rows.map(r=>row(r.a,r.b,r.proj,`${fmt(r.result[0])} - ${fmt(r.result[1])}`,r.hit?'<span class="ok">✓</span>':'<span class="no">✗</span>')).join("")}</table></div>`}).join("");
   const sum=tot?`<div class="card hs"><span>시즌 누적 적중률</span><b>${Math.round(hit/tot*100)}%</b><span class="rec">${hit} / ${tot} 매치업</span></div>`:`<p class="note">주차가 끝나면 처음 작성한 주간 예상과 실제 결과를 비교해 여기에 쌓습니다.</p>`;
   return sum+cur+past;
+}
+const FLAG={Q:"출전 불투명",O:"결장",OFS:"시즌아웃",INJ:"부상",GTD:"당일 결정",DTD:"매일 체크",P:"출전 유력",D:"출전 의문"};
+function rosters(L){
+  const R=L.rosters; if(!R) return `<div class="card note">로스터를 아직 불러오지 못했습니다.</div>`;
+  const cards=L.standings.map(t=>{const rows=(R[t.id]||[]).map(p=>`<tr class="${p.slot.startsWith("IL")?"il":p.slot=="BN"?"bn":""}"><td class="sl">${esc(p.slot)}</td><td class="pn">${esc(p.name)}${p.flag?` <span class="tag b" title="${esc(FLAG[p.flag]||p.flag)}">${esc(p.flag)}</span>`:""}</td><td class="rec">${esc(p.nba)}</td><td class="rec">${esc(p.pos)}</td></tr>`).join("");
+    return `<div class="card"><div class="team"><img src="${esc(t.logo)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="tn">${esc(t.name)}</div></div><table class="rtbl">${rows}</table></div>`}).join("");
+  return `<p class="note">현재 로스터 (약 1시간마다 갱신 · ${esc(L.rosters_asof||"")} KST) · 회색 = 벤치/IL · 빨간 표시 = 부상 상태</p><div class="rgrid">${cards}</div>`;
 }
 function standings(L){
   const ranked=L.standings.some(t=>t.rank);

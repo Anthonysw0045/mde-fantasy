@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo
 LEAGUES = [
     {"id": "90403", "name": "MDE Human League", "type": "cat",        # 9-cat H2H
      "slots": ["PG", "SG", "G", "SF", "PF", "F", "C", "C", "Util", "Util"]},
-    {"id": "245347", "name": "MDE Highscore", "type": "points",       # 포인트(High Score)
+    {"id": "245347", "name": "MDE Highscore", "type": "points", "scoring": "best1",  # High Score: 주전 6명 × 주간 최고 1경기
      "slots": ["G", "G", "FC", "FC", "FC", "Util"]},
 ]
 CATS = ["FG%", "FT%", "3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"]
@@ -249,6 +249,8 @@ def project_league(cfg, week, team_ids):
         res += list(ex.map(run, jobs))
     tot = {tid: {"games": 0, "fgm": 0, "fga": 0, "ftm": 0, "fta": 0, "3PTM": 0, "PTS": 0, "REB": 0, "AST": 0,
                  "ST": 0, "BLK": 0, "TO": 0, "fp": 0.0} for tid in team_ids}
+    if cfg.get("scoring") == "best1":
+        return project_best1(cfg, week, team_ids, res, tot)
     for (tid, d), (wk, players) in res:
         if week and wk != week:
             continue
@@ -284,7 +286,79 @@ def project_league(cfg, week, team_ids):
     return tot
 
 
+# ── High Score(주전 6명 × 주간 최고 1경기) 예상 ──────────────────────────
+# 선수별: 그 주 경기 수 n, 경기당 예상 m(Yahoo 일일 예상 평균), 기복 cv(지난 시즌 경기별 편차/평균)
+# 주간 최고 1경기 기대값 ≈ m × (1 + cv × Z[n])  (Z = 표준정규 n개 중 최대값의 기대값)
+# 주전 6명(G,G,FC,FC,FC,Util)은 이 기대값이 큰 순으로 선택
+Z_MAX = {0: None, 1: 0.0, 2: 0.564, 3: 0.846, 4: 1.029, 5: 1.163, 6: 1.267}
+try:
+    PLAYER_CV = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "player_cv.json"), encoding="utf-8"))
+except Exception:
+    PLAYER_CV = {}
+CV_DEFAULT = PLAYER_CV.get("_median", 0.33)
+
+
+def player_name(cell):
+    nm = re.split(r" (?:Player Note|No new player Notes|New Player Note)", cell)[0]
+    return re.sub(r" (Q|O|P|D|GTD|INJ|OFS|DTD)$", "", nm).strip()
+
+
+def project_best1(cfg, week, team_ids, res, tot):
+    per = {tid: {} for tid in team_ids}           # tid -> 선수 -> {pos, games:[예상 FP]}
+    for (tid, d), (wk, players) in res:
+        if week and wk != week:
+            continue
+        for p in players:
+            r = p["row"]
+            if p["slot"] in ("IL", "IL+") or not re.search(r"(?:vs|@) [A-Z]{2,4}\b", r.get("Players", "")):
+                continue
+            if r.get("PTS", "-") in ("-", ""):
+                continue
+            nm = player_name(r.get("Players", ""))
+            per[tid].setdefault(nm, {"pos": p["pos"], "g": []})["g"].append(f(r.get("Fan Pts")))
+    for tid in team_ids:
+        cands = []
+        for nm, v in per[tid].items():
+            n = min(len(v["g"]), 6)
+            m = sum(v["g"]) / len(v["g"])
+            cv = PLAYER_CV.get(nm, CV_DEFAULT)
+            cands.append({"name": nm, "pos": v["pos"], "n": n, "v": m * (1 + cv * Z_MAX[n])})
+        st = pick_starters(cands, cfg["slots"], key=lambda p: p["v"])
+        tot[tid]["fp"] = round(sum(p["v"] for p in st), 1)
+        tot[tid]["games"] = sum(p["n"] for p in st)
+        tot[tid]["starters"] = [{"name": p["name"], "n": p["n"], "v": round(p["v"], 1)} for p in sorted(st, key=lambda p: -p["v"])]
+    tot["_model"] = "best1"
+    return tot
+
+
 PAGES_CACHE_URL = "https://anthonysw0045.github.io/mde-fantasy/proj_cache.json"
+ROSTER_MAX_AGE_S = 3600     # 로스터는 1시간마다 (팀 12개 페이지 → Yahoo 요청 절약)
+
+
+def load_rosters(cfg, team_ids):
+    lid = cfg["id"]
+    cache = read_cache()
+    rc = cache.setdefault("rosters", {}).get(lid)
+    if rc and time.time() - rc["ts"] < ROSTER_MAX_AGE_S:
+        return rc["teams"], rc["asof"]
+    today = dt.datetime.now(ET).date().isoformat()
+    teams = {}
+    for tid in team_ids:
+        _, players = team_day(lid, tid, today)
+        rows = []
+        for p in players:
+            cell = p["row"].get("Players", "")
+            m = re.search(r"\b([A-Z]{2,4}) - [A-Z,]+", cell)
+            flag = re.search(r" (Q|O|P|D|GTD|INJ|OFS|DTD) (?:Player Note|No new player Notes|New Player Note)", cell)
+            rows.append({"slot": p["slot"], "name": player_name(cell), "nba": m.group(1) if m else "",
+                         "pos": ",".join(p["pos"]), "flag": flag.group(1) if flag else ""})
+        teams[tid] = rows
+        time.sleep(0.5)
+    asof = dt.datetime.now(KST).strftime("%m-%d %H:%M")
+    cache = read_cache()
+    cache.setdefault("rosters", {})[lid] = {"ts": time.time(), "asof": asof, "teams": teams}
+    write_cache(cache)
+    return teams, asof
 
 
 def read_cache():
@@ -309,7 +383,8 @@ def load_proj(cfg, week, team_ids):
     cache = read_cache()
     key = f'{cfg["id"]}-w{week}'
     c = cache.get(key)
-    if c:
+    # High Score 리그는 '최고 1경기' 모델로 만든 예상만 인정 (2026-10-19 규칙 정정 전 합산 예상은 폐기)
+    if c and (cfg.get("scoring") != "best1" or c["tot"].get("_model") == "best1"):
         return c["tot"], c["asof"]
     tot = project_league(cfg, week, team_ids)
     asof = dt.datetime.now(KST).strftime("%m-%d %H:%M")
@@ -400,6 +475,7 @@ def add_projection(cfg, data):
         a["prem_games"], b["prem_games"] = tot[a["id"]]["games"], tot[b["id"]]["games"]
         if cfg.get("type") == "points":
             a["pproj"], b["pproj"] = x, y
+            a["pstarters"], b["pstarters"] = tot[a["id"]].get("starters"), tot[b["id"]].get("starters")
             continue
         a["pstats"], b["pstats"] = det["pa"], det["pb"]
         mu["pcats"], mu["pclose"] = det["pc"], det["close"]
@@ -430,6 +506,10 @@ def league(cfg):
            "week": week, "status": status,
            "matchups": mus, "standings": parse_standings(home, lid), "transactions": tx}
     add_projection(cfg, out)  # 고정된 주간 예상 (끝난 주차도 그대로 표시)
+    try:
+        out["rosters"], out["rosters_asof"] = load_rosters(cfg, [s["id"] for s in out["standings"]])
+    except Exception as e:
+        print("로스터 실패", lid, e)
     try:
         out["history"] = record_history(cfg, week)
     except Exception as e:

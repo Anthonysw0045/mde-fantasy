@@ -9,8 +9,8 @@ docs/data.json 으로 저장한다. docs/index.html 이 이 JSON을 읽어 화�
 import datetime as dt, html, json, os, re, sys, time, urllib.request
 
 LEAGUES = [
-    {"id": "90403", "name": "MDE Human League 2026-27"},
-    # {"id": "245347", "name": "두 번째 리그"},  # 공개 전환 후 활성화
+    {"id": "90403", "name": "MDE Human League", "type": "cat"},      # 9-cat H2H
+    {"id": "245347", "name": "MDE Highscore", "type": "points"},     # 포인트(High Score)
 ]
 CATS = ["FG%", "FT%", "3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"]
 LOWER_BETTER = {"TO"}
@@ -59,13 +59,15 @@ def parse_matchups(s, lid):
         logos = re.findall(r'<img class="Ta-c Avatar-med Grid-u" src="([^"]+)"', li)
         recs = re.findall(r"<div class='Fz-xxs F-shade'>([^<]*)</div>", li)
         scores = re.findall(r"<div class='Fz-lg[^']*'>([^<]*)</div>", li)
+        projs = re.findall(r"<div class='F-shade\s*'>([^<]*)</div>", li)
         teams = []
         for k, tid in enumerate(ids):
             nm = dict(names).get(tid, tid)
             teams.append({"id": tid, "name": html.unescape(nm).strip(),
                           "logo": logos[k] if k < len(logos) else "",
                           "record": recs[k].strip() if k < len(recs) else "",
-                          "score": scores[k].strip() if k < len(scores) else ""})
+                          "score": scores[k].strip() if k < len(scores) else "",
+                          "proj": projs[k].strip() if k < len(projs) else ""})
         out.append({"teams": teams})
     return week, status, out
 
@@ -74,14 +76,18 @@ def parse_standings(s, lid):
     m = re.search(r'(?is)<table[^>]*id="standingstable".*?</table>', s)
     if not m:
         return []
+    head = cells(re.search(r"(?is)<thead>(.*?)</thead>", m.group(0)).group(1))
+    key = {"Rank": "rank", "Team": "name", "W-L-T": "wlt", "Pct": "pct", "GB": "gb", "Pts": "pts",
+           "Last Week": "last", "Waiver": "waiver", "Moves": "moves"}
     rows = []
     for tr in re.findall(r"(?is)<tr class=\"Linkable[^\"]*\"[^>]*>(.*?)</tr>", m.group(0)):
         tid = re.search(r"/nba/%s/(\d+)" % lid, tr).group(1)
         logo = re.search(r'<img[^>]*src="([^"]+)"', tr)
-        c = cells(tr)
-        rows.append({"id": tid, "rank": c[0], "name": c[1], "wlt": c[2], "pct": c[3], "gb": c[4],
-                     "last": c[5], "waiver": c[6], "moves": c[7] if len(c) > 7 else "",
-                     "logo": logo.group(1) if logo else ""})
+        row = {"id": tid, "logo": logo.group(1) if logo else ""}
+        for h, v in zip(head, cells(tr)):
+            if h in key:
+                row[key[h]] = v
+        rows.append(row)
     return rows
 
 
@@ -123,17 +129,27 @@ def cat_result(a, b):
 
 
 def parse_transactions(s):
-    m = re.search(r"(?is)<table.*?</table>", s)
-    if not m or "No recent transactions" in s[:len(s)]:
-        if "No recent transactions" in s:
-            return []
+    """리그 홈 'Recent Transactions' 모듈 (시각은 Yahoo 표기 그대로 — 미국 시간)"""
+    m = re.search(r'(?is)<table class="Table[^"]*Tst-transaction-table">(.*?)</table>', s)
+    if not m:
+        return []
     items = []
-    for t in re.findall(r"(?is)<table.*?</table>", s):
-        for tr in re.findall(r"(?is)<tr[^>]*>(.*?)</tr>", t):
-            c = [x for x in cells(tr) if x]
-            if len(c) >= 2 and re.search(r"(Added|Dropped|Traded|Waiver|Free Agent|FA)", " ".join(c)):
-                items.append(" · ".join(c)[:220])
-    return items[:25]
+    for tr in re.findall(r"(?is)<tr>(.*?)</tr>", m.group(1)):
+        kinds = re.findall(r'<span class="F-icon[^"]*" title="([^"]+)"', tr)
+        moves = []
+        for blk in re.findall(r'(?is)<div class="Pbot-xs">(.*?)</h6>', tr):
+            pl = re.search(r'(?is)<a href="https://sports.yahoo.com/nba/players/\d+"[^>]*>(.*?)</a>', blk)
+            pos = re.search(r'(?is)<span class="F-position[^"]*">(.*?)</span>', blk)
+            how = re.search(r'(?is)<h6[^>]*>(.*)$', blk)
+            moves.append({"player": text(pl.group(1)) if pl else "", "pos": text(pos.group(1)) if pos else "",
+                          "how": text(how.group(1)) if how else ""})
+        team = re.findall(r'(?is)class="Tst-team-name"[^>]*>(.*?)</a>', tr)
+        when = re.search(r'(?is)F-timestamp[^>]*>(.*?)</span>', tr)
+        for k, mv in enumerate(moves):
+            mv["kind"] = {"Added Player": "add", "Dropped Player": "drop", "Traded Player": "trade"}.get(
+                kinds[k] if k < len(kinds) else "", "etc")
+        items.append({"moves": moves, "teams": [text(t) for t in team], "time": text(when.group(1)) if when else ""})
+    return items[:20]
 
 
 def league(cfg):
@@ -142,6 +158,8 @@ def league(cfg):
     week, status, mus = parse_matchups(home, lid)
     for mu in mus:
         a, b = mu["teams"]
+        if cfg.get("type") == "points":
+            continue
         try:
             det = parse_matchup_detail(get(f"{BASE}{lid}/matchup?week={week}&mid1={a['id']}&mid2={b['id']}"))
         except Exception as e:
@@ -153,12 +171,9 @@ def league(cfg):
             w = sum(v == "a" for v in mu["cats"].values()); l = sum(v == "b" for v in mu["cats"].values())
             t = sum(v == "tie" for v in mu["cats"].values())
             a["cw"], b["cw"], mu["ties"] = w, l, t
-    try:
-        tx = parse_transactions(get(BASE + lid + "/transactions"))
-    except Exception as e:
-        print("transactions 실패", e)
-        tx = []
-    return {"id": lid, "name": cfg["name"], "url": BASE + lid, "week": week, "status": status,
+    tx = parse_transactions(home)
+    return {"id": lid, "name": cfg["name"], "type": cfg.get("type", "cat"), "url": BASE + lid,
+            "week": week, "status": status,
             "matchups": mus, "standings": parse_standings(home, lid), "transactions": tx}
 
 

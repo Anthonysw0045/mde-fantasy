@@ -68,6 +68,9 @@ details{margin-top:8px} summary{cursor:pointer;color:var(--muted);font-size:12px
 .tx li{padding:9px 2px;border-bottom:1px solid var(--line);font-size:13px}
 .err{color:var(--b)}
 a{color:inherit}
+.pts{font-size:22px;font-weight:700;color:var(--muted)} .pts.lead{color:var(--a)}
+.tag{display:inline-block;font-size:11px;padding:1px 6px;border-radius:5px;background:var(--line)}
+.tag.a{background:var(--a-soft);color:var(--a)} .tag.b{background:var(--b-soft);color:var(--b)}
 footer{color:var(--muted);font-size:12px;text-align:center;margin:20px 0 8px}
 @media (max-width:420px){.cats{grid-template-columns:repeat(9,1fr);gap:2px}.cat{font-size:9px}.cat b{font-size:10px}.score{font-size:21px}.tn{font-size:13px}}
 </style>
@@ -85,7 +88,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin:20px 0 8px}
     <button data-v="tx">거래 기록</button>
   </div>
   <main id="main"></main>
-  <footer>데이터: Yahoo Fantasy 공개 리그 페이지 · 약 15분마다 자동 갱신</footer>
+  <footer>데이터: Yahoo Fantasy 공개 리그 · 약 15분마다 자동 갱신</footer>
 </div>
 <script>
 const CATS=["FG%","FT%","3PTM","PTS","REB","AST","ST","BLK","TO"];
@@ -112,9 +115,9 @@ function render(){
   const L=d.leagues[S.lg], M=document.getElementById("main");
   if(L.error){M.innerHTML=`<div class="card err">${esc(L.name)} — 불러오기 실패: ${esc(L.error)}</div>`;return}
   const meta=`<div class="meta"><span><b>${L.week?L.week+"주차":""}</b> <span class="pill">${esc(stLabel(L.status))}</span></span><a href="${esc(L.url)}" target="_blank" rel="noopener">Yahoo에서 보기 ↗</a></div>`;
-  if(S.view=="mu") M.innerHTML=meta+L.matchups.map(mu).join("");
+  if(S.view=="mu") M.innerHTML=meta+L.matchups.map(L.type=="points"?muPts:mu).join("");
   else if(S.view=="st") M.innerHTML=meta+standings(L);
-  else M.innerHTML=meta+(L.transactions.length?`<div class="card"><ul class="tx">${L.transactions.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>`:`<div class="card note">아직 거래 기록이 없습니다.</div>`);
+  else M.innerHTML=meta+(L.transactions.length?`<div class="card"><ul class="tx">${L.transactions.map(txItem).join("")}</ul></div><p class="note">최근 거래만 표시 · 시각은 Yahoo 표기(미국 시간)</p>`:`<div class="card note">아직 거래 기록이 없습니다.</div>`);
 }
 function teamHtml(t,right){
   return `<div class="team ${right?"r":""}"><img src="${esc(t.logo)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div style="min-width:0"><div class="tn">${esc(t.name)}</div><div class="rec">${esc(t.record)}</div></div></div>`;
@@ -131,10 +134,24 @@ function mu(m){
     <div class="cats">${chips}</div>
     <details><summary>카테고리 상세</summary><table class="stbl">${rows}</table></details></div>`;
 }
+const KIND={add:["영입","a"],drop:["방출","b"],trade:["트레이드",""],etc:["",""]};
+function txItem(t){
+  const mv=(t.moves||[]).map(m=>{const [k,c]=KIND[m.kind]||KIND.etc;return `<div><span class="tag ${c}">${k}</span> <b>${esc(m.player)}</b> <span class="rec">${esc(m.pos)}</span></div>`}).join("");
+  return `<li>${mv}<div class="rec">${esc((t.teams||[]).join(" ↔ "))} · ${esc(t.time)}</div></li>`;
+}
+function muPts(m){
+  const [a,b]=m.teams, x=parseFloat(a.score)||0, y=parseFloat(b.score)||0, started=x>0||y>0;
+  const lead=started?(x>y?"a":y>x?"b":""):((parseFloat(a.proj)||0)>(parseFloat(b.proj)||0)?"pa":"pb");
+  const side=(t,k,r)=>`<div style="text-align:${r?"right":"left"}"><div class="pts ${lead==k?"lead":""}">${esc(t.score||"0")}</div><div class="rec">예상 ${esc(t.proj||"-")}</div></div>`;
+  return `<div class="card"><div class="vs">${teamHtml(a)}<div class="score"><span class="d">vs</span></div>${teamHtml(b,true)}</div>
+    <div class="vs" style="margin-top:8px">${side(a,"a")}<div></div>${side(b,"b",1)}</div>
+    ${!started?`<div class="note" style="margin:6px 0 0">예상 우세: ${esc((lead=="pa"?a:b).name)}</div>`:""}</div>`;
+}
 function standings(L){
   const ranked=L.standings.some(t=>t.rank);
-  const rows=L.standings.map((t,i)=>`<tr class="${ranked&&i<6?"po":""}"><td class="rk">${esc(t.rank||"-")}</td><td class="nm"><div><img src="${esc(t.logo)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>${esc(t.name)}</span></div></td><td>${esc(t.wlt)}</td><td>${esc(t.gb)}</td><td>${esc(t.waiver)}</td><td>${esc(t.moves)}</td></tr>`).join("");
-  return `<div class="card" style="padding:6px 8px"><table class="tbl"><thead><tr><th>#</th><th style="text-align:left">팀</th><th>승-패-무</th><th>GB</th><th>웨이버</th><th>영입</th></tr></thead><tbody>${rows}</tbody></table></div>
+  const rows=L.standings.map((t,i)=>`<tr class="${ranked&&i<6?"po":""}"><td class="rk">${esc(t.rank||"-")}</td><td class="nm"><div><img src="${esc(t.logo)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>${esc(t.name)}</span></div></td><td>${esc(t.wlt)}</td><td>${esc(L.type=="points"?t.pts:t.gb)}</td><td>${esc(t.waiver)}</td><td>${esc(t.moves)}</td></tr>`).join("");
+  const third=L.type=="points"?["누적점수","pts"]:["GB","gb"];
+  return `<div class="card" style="padding:6px 8px"><table class="tbl"><thead><tr><th>#</th><th style="text-align:left">팀</th><th>승-패-무</th><th>${third[0]}</th><th>웨이버</th><th>영입</th></tr></thead><tbody>${rows}</tbody></table></div>
   <p class="note">${ranked?"음영 = 플레이오프권(상위 6팀) · ":"시즌 시작 전 — 순위 미정 · "}웨이버 = 우선순위(1이 최우선)</p>`;
 }
 document.getElementById("tabs").onclick=e=>{const b=e.target.closest("button");if(b){S.lg=+b.dataset.i;save();render()}};

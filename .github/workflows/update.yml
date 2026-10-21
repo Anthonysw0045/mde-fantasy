@@ -44,6 +44,16 @@ jobs:
           path: docs
       - id: deploy
         uses: actions/deploy-pages@v4
+      # 자체 점검 경고가 있으면 배포 후 실패 처리 → Actions 기록에 빨간 X 로 남김 (화면 상단에도 경고 표시)
+      - name: health check
+        run: |
+          python - <<'EOF'
+          import json, sys
+          d = json.load(open("docs/data.json", encoding="utf-8"))
+          w = [l["name"] + " — " + m for l in d["leagues"] for m in l.get("warn") or []]
+          print("\n".join(w) or "OK")
+          sys.exit(1 if w else 0)
+          EOF
 
   relay:
     # push(화면 수정)는 배포만 하고 이어달리기는 기존 체인에 맡긴다

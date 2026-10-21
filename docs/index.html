@@ -67,6 +67,8 @@ details{margin-top:8px} summary{cursor:pointer;color:var(--muted);font-size:12px
 .tx{list-style:none;padding:0;margin:0}
 .tx li{padding:9px 2px;border-bottom:1px solid var(--line);font-size:13px}
 .err{color:var(--b)}
+.warn{border:1px solid var(--b);color:var(--b);font-size:13px}
+.warn ul{margin:4px 0 0;padding-left:18px}
 a{color:inherit}
 .pts{font-size:22px;font-weight:700;color:var(--muted)} .pts.lead{color:var(--a)}
 .tag{display:inline-block;font-size:11px;padding:1px 6px;border-radius:5px;background:var(--line)}
@@ -116,10 +118,10 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin:20px 0 8px}
     <button data-v="tx">거래 기록</button>
   </div>
   <main id="main"></main>
-  <footer>데이터: Yahoo Fantasy 공개 리그 · 실제 점수 약 5분마다 갱신 · 주간 예상은 주차 시작 전 작성</footer>
+  <footer>데이터: Yahoo Fantasy 공개 리그 · 실제 점수 경기 시간 약 5분·그 외 약 20분마다 갱신 · 로스터는 새 거래 시 즉시 · 주간 예상은 주차 시작 전 작성</footer>
 </div>
 <script>
-const PAGE_VER="20261019-6";  // 화면 수정 시 올림 → 옛 화면이 캐시된 폰은 자동 새로고침
+const PAGE_VER="20261022-1";  // 화면 수정 시 올림 → 옛 화면이 캐시된 폰은 자동 새로고침
 const CATS=["FG%","FT%","3PTM","PTS","REB","AST","ST","BLK","TO"];
 const LBL={"3PTM":"3PM"};
 const S={data:null,lg:0,view:"mu"};
@@ -145,7 +147,8 @@ function render(){
   document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.v==S.view));
   const L=d.leagues[S.lg], M=document.getElementById("main");
   if(L.error){M.innerHTML=`<div class="card err">${esc(L.name)} — 불러오기 실패: ${esc(L.error)}</div>`;return}
-  const meta=`<div class="meta"><span><b>${L.week?L.week+"주차":""}</b> <span class="pill">${esc(stLabel(L.status))}</span></span><a href="${esc(L.url)}" target="_blank" rel="noopener">Yahoo에서 보기 ↗</a></div>`+(L.proj_asof&&S.view=="mu"?`<p class="note" style="margin-top:-4px">● 현재 = Yahoo 실제 경기 기록(약 5분마다 갱신) · ◇ 주간 예상 = 주차 시작 전에 양 팀 모두 풀 출전을 가정해 작성, 주중에는 고정 (작성 ${esc(L.proj_asof)} KST)</p>`:"");
+  const warn=(L.warn||[]).length?`<div class="card warn">⚠ 일부 정보가 Yahoo와 다르거나 갱신되지 않았을 수 있습니다<ul>${L.warn.map(w=>`<li>${esc(w)}</li>`).join("")}</ul></div>`:"";
+  const meta=warn+`<div class="meta"><span><b>${L.week?L.week+"주차":""}</b> <span class="pill">${esc(stLabel(L.status))}</span></span><a href="${esc(L.url)}" target="_blank" rel="noopener">Yahoo에서 보기 ↗</a></div>`+(L.proj_asof&&S.view=="mu"?`<p class="note" style="margin-top:-4px">● 현재 = Yahoo 실제 경기 기록(약 5분마다 갱신) · ◇ 주간 예상 = 주차 시작 전에 양 팀 모두 풀 출전을 가정해 작성, 주중에는 고정 (작성 ${esc(L.proj_asof)} KST)</p>`:"");
   if(S.view=="mu") M.innerHTML=meta+L.matchups.map(L.type=="points"?muPts:mu).join("");
   else if(S.view=="st") M.innerHTML=meta+standings(L);
   else if(S.view=="hx") M.innerHTML=meta+history(L);

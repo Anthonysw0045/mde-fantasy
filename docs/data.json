@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19 11:06 KST",
+ "updated": "2026-10-22 08:56 KST",
  "leagues": [
   {
    "id": "90403",
@@ -7,7 +7,7 @@
    "type": "cat",
    "url": "https://basketball.fantasysports.yahoo.com/nba/90403",
    "week": 1,
-   "status": "Not started yet",
+   "status": "In progress",
    "matchups": [
     {
      "teams": [
@@ -15,59 +15,101 @@
        "id": "1",
        "name": "[한별] 어머! 얜 잡아야해",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/56484795041_55d1aa.jpg",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 1st",
+       "score": "6",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "15/28",
+        "FTM/A*": "2/3",
+        "FG%": ".536",
+        "FT%": ".667",
+        "3PTM": "5",
+        "PTS": "37",
+        "REB": "14",
+        "AST": "6",
+        "ST": "3",
+        "BLK": "1",
+        "TO": "8"
        },
-       "cw": 0
+       "cw": 6,
+       "prem_games": 37,
+       "pstats": {
+        "FG%": 0.472,
+        "FT%": 0.805,
+        "3PTM": 72.2,
+        "PTS": 607.5,
+        "REB": 214.5,
+        "AST": 150.2,
+        "ST": 37.3,
+        "BLK": 27.2,
+        "TO": 67.9
+       },
+       "pcw": 6
       },
       {
        "id": "8",
-       "name": "jongsik's Bold Team",
+       "name": "[종식] 엔드킴",
        "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-basketball-1-png_1721241298854.png",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 8th",
+       "score": "2",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "5/13",
+        "FTM/A*": "3/3",
+        "FG%": ".385",
+        "FT%": "1.000",
+        "3PTM": "1",
+        "PTS": "14",
+        "REB": "5",
+        "AST": "5",
+        "ST": "1",
+        "BLK": "1",
+        "TO": "2"
        },
-       "cw": 0
+       "cw": 2,
+       "prem_games": 33,
+       "pstats": {
+        "FG%": 0.499,
+        "FT%": 0.786,
+        "3PTM": 60.2,
+        "PTS": 611.6,
+        "REB": 204.6,
+        "AST": 116.4,
+        "ST": 35.1,
+        "BLK": 26.2,
+        "TO": 62.8
+       },
+       "pcw": 3
       }
      ],
      "cats": {
-      "FG%": null,
-      "FT%": null,
-      "3PTM": null,
-      "PTS": null,
-      "REB": null,
-      "AST": null,
-      "ST": null,
-      "BLK": null,
-      "TO": null
+      "FG%": "a",
+      "FT%": "b",
+      "3PTM": "a",
+      "PTS": "a",
+      "REB": "a",
+      "AST": "a",
+      "ST": "a",
+      "BLK": "tie",
+      "TO": "b"
      },
-     "ties": 0
+     "ties": 1,
+     "pcats": {
+      "FG%": "b",
+      "FT%": "a",
+      "3PTM": "a",
+      "PTS": "b",
+      "REB": "a",
+      "AST": "a",
+      "ST": "a",
+      "BLK": "a",
+      "TO": "b"
+     },
+     "pclose": [
+      "PTS",
+      "REB",
+      "BLK"
+     ]
     },
     {
      "teams": [
@@ -75,59 +117,102 @@
        "id": "2",
        "name": "[길훈] 개미사냥꾼",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/ad238898231cfb5bb68029df2160bd5296ee46bf51bca6d5d8b5eb4724722285.jpg",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 2nd",
+       "score": "6",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "21/61",
+        "FTM/A*": "17/18",
+        "FG%": ".344",
+        "FT%": ".944",
+        "3PTM": "5",
+        "PTS": "64",
+        "REB": "36",
+        "AST": "13",
+        "ST": "5",
+        "BLK": "10",
+        "TO": "11"
        },
-       "cw": 0
+       "cw": 6,
+       "prem_games": 40,
+       "pstats": {
+        "FG%": 0.477,
+        "FT%": 0.802,
+        "3PTM": 75.2,
+        "PTS": 635.6,
+        "REB": 240.9,
+        "AST": 109.7,
+        "ST": 39.4,
+        "BLK": 39.9,
+        "TO": 65.6
+       },
+       "pcw": 6
       },
       {
        "id": "5",
        "name": "[민호]필라는놔두라고",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/d86ee4596978900d99be157ec9c9590fb5e6b139e71dfe844f0128ea9ec7813f.jpg",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 5th",
+       "score": "2",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "13/36",
+        "FTM/A*": "4/6",
+        "FG%": ".361",
+        "FT%": ".667",
+        "3PTM": "5",
+        "PTS": "35",
+        "REB": "18",
+        "AST": "10",
+        "ST": "4",
+        "BLK": "1",
+        "TO": "4"
        },
-       "cw": 0
+       "cw": 2,
+       "prem_games": 35,
+       "pstats": {
+        "FG%": 0.483,
+        "FT%": 0.814,
+        "3PTM": 66.4,
+        "PTS": 632.7,
+        "REB": 236.8,
+        "AST": 129.7,
+        "ST": 37.8,
+        "BLK": 23.7,
+        "TO": 71.0
+       },
+       "pcw": 3
       }
      ],
      "cats": {
-      "FG%": null,
-      "FT%": null,
-      "3PTM": null,
-      "PTS": null,
-      "REB": null,
-      "AST": null,
-      "ST": null,
-      "BLK": null,
-      "TO": null
+      "FG%": "b",
+      "FT%": "a",
+      "3PTM": "tie",
+      "PTS": "a",
+      "REB": "a",
+      "AST": "a",
+      "ST": "a",
+      "BLK": "a",
+      "TO": "b"
      },
-     "ties": 0
+     "ties": 1,
+     "pcats": {
+      "FG%": "b",
+      "FT%": "b",
+      "3PTM": "a",
+      "PTS": "a",
+      "REB": "a",
+      "AST": "b",
+      "ST": "a",
+      "BLK": "a",
+      "TO": "a"
+     },
+     "pclose": [
+      "FG%",
+      "PTS",
+      "REB",
+      "ST"
+     ]
     },
     {
      "teams": [
@@ -135,59 +220,97 @@
        "id": "3",
        "name": "[덕호] 차차차",
        "logo": "https://s.yimg.com/cv/apiv2/default/nba/nba_4.png",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 3rd",
+       "score": "2",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "25/56",
+        "FTM/A*": "20/21",
+        "FG%": ".446",
+        "FT%": ".952",
+        "3PTM": "2",
+        "PTS": "72",
+        "REB": "26",
+        "AST": "8",
+        "ST": "3",
+        "BLK": "1",
+        "TO": "6"
        },
-       "cw": 0
+       "cw": 2,
+       "prem_games": 36,
+       "pstats": {
+        "FG%": 0.495,
+        "FT%": 0.774,
+        "3PTM": 60.3,
+        "PTS": 647.4,
+        "REB": 204.3,
+        "AST": 153.7,
+        "ST": 31.1,
+        "BLK": 17.9,
+        "TO": 74.3
+       },
+       "pcw": 3
       },
       {
        "id": "12",
        "name": "[승완] 클로드는 열일중",
        "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-rainbow-png_1721952390362.png",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 12th",
+       "score": "6",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "29/58",
+        "FTM/A*": "13/20",
+        "FG%": ".500",
+        "FT%": ".650",
+        "3PTM": "8",
+        "PTS": "79",
+        "REB": "31",
+        "AST": "19",
+        "ST": "3",
+        "BLK": "3",
+        "TO": "12"
        },
-       "cw": 0
+       "cw": 6,
+       "prem_games": 37,
+       "pstats": {
+        "FG%": 0.467,
+        "FT%": 0.81,
+        "3PTM": 65.5,
+        "PTS": 595.9,
+        "REB": 219.7,
+        "AST": 118.6,
+        "ST": 38.7,
+        "BLK": 22.9,
+        "TO": 63.6
+       },
+       "pcw": 6
       }
      ],
      "cats": {
-      "FG%": null,
-      "FT%": null,
-      "3PTM": null,
-      "PTS": null,
-      "REB": null,
-      "AST": null,
-      "ST": null,
-      "BLK": null,
-      "TO": null
+      "FG%": "b",
+      "FT%": "a",
+      "3PTM": "b",
+      "PTS": "b",
+      "REB": "b",
+      "AST": "b",
+      "ST": "tie",
+      "BLK": "b",
+      "TO": "a"
      },
-     "ties": 0
+     "ties": 1,
+     "pcats": {
+      "FG%": "a",
+      "FT%": "b",
+      "3PTM": "b",
+      "PTS": "a",
+      "REB": "b",
+      "AST": "a",
+      "ST": "b",
+      "BLK": "b",
+      "TO": "b"
+     },
+     "pclose": []
     },
     {
      "teams": [
@@ -195,59 +318,101 @@
        "id": "4",
        "name": "[동한] 쌉싸라도스",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/dcb8f3a4b50fa84893c123468d2268beb84d890b19c582bc0a065f82476bef38.jpg",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 4th",
+       "score": "3",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "23/49",
+        "FTM/A*": "6/6",
+        "FG%": ".469",
+        "FT%": "1.000",
+        "3PTM": "6",
+        "PTS": "58",
+        "REB": "17",
+        "AST": "9",
+        "ST": "2",
+        "BLK": "1",
+        "TO": "11"
        },
-       "cw": 0
+       "cw": 3,
+       "prem_games": 35,
+       "pstats": {
+        "FG%": 0.483,
+        "FT%": 0.782,
+        "3PTM": 51.7,
+        "PTS": 581.2,
+        "REB": 218.9,
+        "AST": 151.8,
+        "ST": 34.8,
+        "BLK": 20.4,
+        "TO": 77.1
+       },
+       "pcw": 2
       },
       {
        "id": "6",
        "name": "[준식] 웸비야 해줘",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/37f62b3a2ef70f5c8bcbce81110de10b7b83f5eac8b312e1746ae29b855a783c.png",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 6th",
+       "score": "6",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "18/44",
+        "FTM/A*": "19/24",
+        "FG%": ".409",
+        "FT%": ".792",
+        "3PTM": "7",
+        "PTS": "62",
+        "REB": "22",
+        "AST": "8",
+        "ST": "8",
+        "BLK": "6",
+        "TO": "8"
        },
-       "cw": 0
+       "cw": 6,
+       "prem_games": 36,
+       "pstats": {
+        "FG%": 0.487,
+        "FT%": 0.811,
+        "3PTM": 61.3,
+        "PTS": 586.8,
+        "REB": 200.8,
+        "AST": 150.8,
+        "ST": 43.5,
+        "BLK": 26.3,
+        "TO": 70.9
+       },
+       "pcw": 7
       }
      ],
      "cats": {
-      "FG%": null,
-      "FT%": null,
-      "3PTM": null,
-      "PTS": null,
-      "REB": null,
-      "AST": null,
-      "ST": null,
-      "BLK": null,
-      "TO": null
+      "FG%": "a",
+      "FT%": "a",
+      "3PTM": "b",
+      "PTS": "b",
+      "REB": "b",
+      "AST": "a",
+      "ST": "b",
+      "BLK": "b",
+      "TO": "b"
      },
-     "ties": 0
+     "ties": 0,
+     "pcats": {
+      "FG%": "b",
+      "FT%": "b",
+      "3PTM": "b",
+      "PTS": "b",
+      "REB": "a",
+      "AST": "a",
+      "ST": "b",
+      "BLK": "b",
+      "TO": "b"
+     },
+     "pclose": [
+      "FG%",
+      "PTS",
+      "AST"
+     ]
     },
     {
      "teams": [
@@ -255,59 +420,101 @@
        "id": "7",
        "name": "[진규] 마지막 판타지_v2",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cba95099d9440b278b13b20e2337ebda015c6a04a24b0325c481a2ddf6dd455f.jpg",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 7th",
+       "score": "4",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "22/50",
+        "FTM/A*": "7/12",
+        "FG%": ".440",
+        "FT%": ".583",
+        "3PTM": "4",
+        "PTS": "55",
+        "REB": "24",
+        "AST": "15",
+        "ST": "5",
+        "BLK": "5",
+        "TO": "4"
        },
-       "cw": 0
+       "cw": 4,
+       "prem_games": 34,
+       "pstats": {
+        "FG%": 0.486,
+        "FT%": 0.801,
+        "3PTM": 60.6,
+        "PTS": 606.0,
+        "REB": 186.2,
+        "AST": 133.0,
+        "ST": 31.8,
+        "BLK": 21.1,
+        "TO": 70.9
+       },
+       "pcw": 4
       },
       {
        "id": "10",
        "name": "[허규]형",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/9110f0f839fc8226bee8bfc1f66ca8c720f58c09fcfde805091841435da87ce0.jpg",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 10th",
+       "score": "4",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "16/38",
+        "FTM/A*": "11/18",
+        "FG%": ".421",
+        "FT%": ".611",
+        "3PTM": "1",
+        "PTS": "44",
+        "REB": "32",
+        "AST": "23",
+        "ST": "5",
+        "BLK": "6",
+        "TO": "10"
        },
-       "cw": 0
+       "cw": 4,
+       "prem_games": 33,
+       "pstats": {
+        "FG%": 0.489,
+        "FT%": 0.781,
+        "3PTM": 45.4,
+        "PTS": 498.8,
+        "REB": 214.6,
+        "AST": 166.0,
+        "ST": 35.5,
+        "BLK": 21.7,
+        "TO": 73.5
+       },
+       "pcw": 5
       }
      ],
      "cats": {
-      "FG%": null,
-      "FT%": null,
-      "3PTM": null,
-      "PTS": null,
-      "REB": null,
-      "AST": null,
-      "ST": null,
-      "BLK": null,
-      "TO": null
+      "FG%": "a",
+      "FT%": "b",
+      "3PTM": "a",
+      "PTS": "a",
+      "REB": "b",
+      "AST": "b",
+      "ST": "tie",
+      "BLK": "b",
+      "TO": "a"
      },
-     "ties": 0
+     "ties": 1,
+     "pcats": {
+      "FG%": "b",
+      "FT%": "a",
+      "3PTM": "a",
+      "PTS": "a",
+      "REB": "b",
+      "AST": "b",
+      "ST": "b",
+      "BLK": "b",
+      "TO": "a"
+     },
+     "pclose": [
+      "FG%",
+      "BLK",
+      "TO"
+     ]
     },
     {
      "teams": [
@@ -315,208 +522,1531 @@
        "id": "9",
        "name": "[홍재] 돌아온 홍몬스",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cf40dc59f028a0fd8a00ecb4d3614e7c7bd3da5225517440de4dcab21f463150.jpg",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 9th",
+       "score": "3",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "27/69",
+        "FTM/A*": "10/12",
+        "FG%": ".391",
+        "FT%": ".833",
+        "3PTM": "5",
+        "PTS": "69",
+        "REB": "29",
+        "AST": "27",
+        "ST": "5",
+        "BLK": "4",
+        "TO": "7"
        },
-       "cw": 0
+       "cw": 3,
+       "prem_games": 32,
+       "pstats": {
+        "FG%": 0.484,
+        "FT%": 0.761,
+        "3PTM": 47.2,
+        "PTS": 581.8,
+        "REB": 200.8,
+        "AST": 131.2,
+        "ST": 35.1,
+        "BLK": 21.8,
+        "TO": 71.7
+       },
+       "pcw": 1
       },
       {
        "id": "11",
        "name": "박재현 /Park Chea Hyen Jay's Team",
        "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-avatar-portrait-10-120-x-png_1728591621139.png",
-       "record": "0-0-0",
-       "score": "0",
+       "record": "0-0-0  | 11th",
+       "score": "5",
        "proj": "",
        "stats": {
-        "FGM/A*": "-/-",
-        "FTM/A*": "-/-",
-        "FG%": "-",
-        "FT%": "-",
-        "3PTM": "-",
-        "PTS": "-",
-        "REB": "-",
-        "AST": "-",
-        "ST": "-",
-        "BLK": "-",
-        "TO": "-"
+        "FGM/A*": "24/56",
+        "FTM/A*": "16/21",
+        "FG%": ".429",
+        "FT%": ".762",
+        "3PTM": "6",
+        "PTS": "70",
+        "REB": "26",
+        "AST": "11",
+        "ST": "5",
+        "BLK": "5",
+        "TO": "5"
        },
-       "cw": 0
+       "cw": 5,
+       "prem_games": 37,
+       "pstats": {
+        "FG%": 0.497,
+        "FT%": 0.814,
+        "3PTM": 57.4,
+        "PTS": 659.0,
+        "REB": 207.6,
+        "AST": 147.4,
+        "ST": 39.7,
+        "BLK": 25.7,
+        "TO": 73.3
+       },
+       "pcw": 8
       }
      ],
      "cats": {
-      "FG%": null,
-      "FT%": null,
-      "3PTM": null,
-      "PTS": null,
-      "REB": null,
-      "AST": null,
-      "ST": null,
-      "BLK": null,
-      "TO": null
+      "FG%": "b",
+      "FT%": "a",
+      "3PTM": "b",
+      "PTS": "b",
+      "REB": "a",
+      "AST": "a",
+      "ST": "tie",
+      "BLK": "b",
+      "TO": "b"
      },
-     "ties": 0
+     "ties": 1,
+     "pcats": {
+      "FG%": "b",
+      "FT%": "b",
+      "3PTM": "b",
+      "PTS": "b",
+      "REB": "b",
+      "AST": "b",
+      "ST": "b",
+      "BLK": "b",
+      "TO": "a"
+     },
+     "pclose": [
+      "REB",
+      "TO"
+     ]
     }
    ],
    "standings": [
     {
      "id": "1",
      "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/56484795041_55d1aa.jpg",
-     "rank": "",
+     "rank": "1",
      "name": "[한별] 어머! 얜 잡아야해",
      "wlt": "0-0-0",
      "pct": ".000",
-     "gb": "0",
+     "gb": "-",
      "last": "-",
-     "waiver": "1",
-     "moves": "-"
+     "waiver": "9",
+     "moves": "2"
     },
     {
      "id": "2",
      "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/ad238898231cfb5bb68029df2160bd5296ee46bf51bca6d5d8b5eb4724722285.jpg",
-     "rank": "",
+     "rank": "2",
      "name": "[길훈] 개미사냥꾼",
      "wlt": "0-0-0",
      "pct": ".000",
-     "gb": "0",
+     "gb": "-",
      "last": "-",
-     "waiver": "4",
-     "moves": "-"
+     "waiver": "3",
+     "moves": "1"
     },
     {
      "id": "3",
      "logo": "https://s.yimg.com/cv/apiv2/default/nba/nba_4.png",
-     "rank": "",
+     "rank": "3",
      "name": "[덕호] 차차차",
      "wlt": "0-0-0",
      "pct": ".000",
-     "gb": "0",
+     "gb": "-",
      "last": "-",
-     "waiver": "8",
-     "moves": "-"
+     "waiver": "6",
+     "moves": "3"
     },
     {
      "id": "4",
      "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/dcb8f3a4b50fa84893c123468d2268beb84d890b19c582bc0a065f82476bef38.jpg",
-     "rank": "",
+     "rank": "4",
      "name": "[동한] 쌉싸라도스",
      "wlt": "0-0-0",
      "pct": ".000",
-     "gb": "0",
-     "last": "-",
-     "waiver": "7",
-     "moves": "-"
-    },
-    {
-     "id": "5",
-     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/d86ee4596978900d99be157ec9c9590fb5e6b139e71dfe844f0128ea9ec7813f.jpg",
-     "rank": "",
-     "name": "[민호]필라는놔두라고",
-     "wlt": "0-0-0",
-     "pct": ".000",
-     "gb": "0",
-     "last": "-",
-     "waiver": "9",
-     "moves": "-"
-    },
-    {
-     "id": "6",
-     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/37f62b3a2ef70f5c8bcbce81110de10b7b83f5eac8b312e1746ae29b855a783c.png",
-     "rank": "",
-     "name": "[준식] 웸비야 해줘",
-     "wlt": "0-0-0",
-     "pct": ".000",
-     "gb": "0",
-     "last": "-",
-     "waiver": "11",
-     "moves": "-"
-    },
-    {
-     "id": "7",
-     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cba95099d9440b278b13b20e2337ebda015c6a04a24b0325c481a2ddf6dd455f.jpg",
-     "rank": "",
-     "name": "[진규] 마지막 판타지_v2",
-     "wlt": "0-0-0",
-     "pct": ".000",
-     "gb": "0",
-     "last": "-",
-     "waiver": "10",
-     "moves": "-"
-    },
-    {
-     "id": "8",
-     "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-basketball-1-png_1721241298854.png",
-     "rank": "",
-     "name": "jongsik's Bold Team",
-     "wlt": "0-0-0",
-     "pct": ".000",
-     "gb": "0",
-     "last": "-",
-     "waiver": "2",
-     "moves": "-"
-    },
-    {
-     "id": "9",
-     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cf40dc59f028a0fd8a00ecb4d3614e7c7bd3da5225517440de4dcab21f463150.jpg",
-     "rank": "",
-     "name": "[홍재] 돌아온 홍몬스",
-     "wlt": "0-0-0",
-     "pct": ".000",
-     "gb": "0",
-     "last": "-",
-     "waiver": "6",
-     "moves": "-"
-    },
-    {
-     "id": "10",
-     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/9110f0f839fc8226bee8bfc1f66ca8c720f58c09fcfde805091841435da87ce0.jpg",
-     "rank": "",
-     "name": "[허규]형",
-     "wlt": "0-0-0",
-     "pct": ".000",
-     "gb": "0",
-     "last": "-",
-     "waiver": "12",
-     "moves": "-"
-    },
-    {
-     "id": "11",
-     "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-avatar-portrait-10-120-x-png_1728591621139.png",
-     "rank": "",
-     "name": "박재현 /Park Chea Hyen Jay's Team",
-     "wlt": "0-0-0",
-     "pct": ".000",
-     "gb": "0",
+     "gb": "-",
      "last": "-",
      "waiver": "5",
      "moves": "-"
     },
     {
+     "id": "5",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/d86ee4596978900d99be157ec9c9590fb5e6b139e71dfe844f0128ea9ec7813f.jpg",
+     "rank": "5",
+     "name": "[민호]필라는놔두라고",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "-",
+     "last": "-",
+     "waiver": "10",
+     "moves": "1"
+    },
+    {
+     "id": "6",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/37f62b3a2ef70f5c8bcbce81110de10b7b83f5eac8b312e1746ae29b855a783c.png",
+     "rank": "6",
+     "name": "[준식] 웸비야 해줘",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "-",
+     "last": "-",
+     "waiver": "7",
+     "moves": "-"
+    },
+    {
+     "id": "7",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cba95099d9440b278b13b20e2337ebda015c6a04a24b0325c481a2ddf6dd455f.jpg",
+     "rank": "7",
+     "name": "[진규] 마지막 판타지_v2",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "-",
+     "last": "-",
+     "waiver": "11",
+     "moves": "1"
+    },
+    {
+     "id": "8",
+     "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-basketball-1-png_1721241298854.png",
+     "rank": "8",
+     "name": "[종식] 엔드킴",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "-",
+     "last": "-",
+     "waiver": "1",
+     "moves": "-"
+    },
+    {
+     "id": "9",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/cf40dc59f028a0fd8a00ecb4d3614e7c7bd3da5225517440de4dcab21f463150.jpg",
+     "rank": "9",
+     "name": "[홍재] 돌아온 홍몬스",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "-",
+     "last": "-",
+     "waiver": "12",
+     "moves": "4"
+    },
+    {
+     "id": "10",
+     "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/9110f0f839fc8226bee8bfc1f66ca8c720f58c09fcfde805091841435da87ce0.jpg",
+     "rank": "10",
+     "name": "[허규]형",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "-",
+     "last": "-",
+     "waiver": "8",
+     "moves": "2"
+    },
+    {
+     "id": "11",
+     "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-avatar-portrait-10-120-x-png_1728591621139.png",
+     "rank": "11",
+     "name": "박재현 /Park Chea Hyen Jay's Team",
+     "wlt": "0-0-0",
+     "pct": ".000",
+     "gb": "-",
+     "last": "-",
+     "waiver": "4",
+     "moves": "-"
+    },
+    {
      "id": "12",
      "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-rainbow-png_1721952390362.png",
-     "rank": "",
+     "rank": "12",
      "name": "[승완] 클로드는 열일중",
      "wlt": "0-0-0",
      "pct": ".000",
-     "gb": "0",
+     "gb": "-",
      "last": "-",
-     "waiver": "3",
-     "moves": "-"
+     "waiver": "2",
+     "moves": "1"
     }
    ],
-   "transactions": []
+   "transactions": [
+    {
+     "moves": [
+      {
+       "player": "Tre Jones",
+       "pos": "CHI - PG,SG",
+       "how": "Free Agent",
+       "kind": "add"
+      }
+     ],
+     "teams": [
+      "[승완] 클로드는 열일중"
+     ],
+     "time": "Oct 21, 7:31 pm"
+    },
+    {
+     "moves": [
+      {
+       "player": "Isaiah Jackson",
+       "pos": "LAC - C",
+       "how": "Free Agent",
+       "kind": "add"
+      },
+      {
+       "player": "Jimmy Butler III",
+       "pos": "GSW - SF,PF",
+       "how": "To Waivers",
+       "kind": "drop"
+      }
+     ],
+     "teams": [
+      "[홍재] 돌아온 홍몬스"
+     ],
+     "time": "Oct 21, 6:28 pm"
+    },
+    {
+     "moves": [
+      {
+       "player": "Kelly Oubre Jr.",
+       "pos": "IND - SF,PF",
+       "how": "Free Agent",
+       "kind": "add"
+      },
+      {
+       "player": "Keldon Johnson",
+       "pos": "SAS - SF,PF",
+       "how": "To Waivers",
+       "kind": "drop"
+      }
+     ],
+     "teams": [
+      "[덕호] 차차차"
+     ],
+     "time": "Oct 21, 8:28 am"
+    },
+    {
+     "moves": [
+      {
+       "player": "Maxime Raynaud",
+       "pos": "SAC - C",
+       "how": "Free Agent",
+       "kind": "add"
+      }
+     ],
+     "teams": [
+      "[한별] 어머! 얜 잡아야해"
+     ],
+     "time": "Oct 20, 6:46 pm"
+    },
+    {
+     "moves": [
+      {
+       "player": "Tobias Harris",
+       "pos": "SAS - PF",
+       "how": "Free Agent",
+       "kind": "add"
+      }
+     ],
+     "teams": [
+      "[길훈] 개미사냥꾼"
+     ],
+     "time": "Oct 20, 6:39 pm"
+    }
+   ],
+   "proj_asof": "10-19 11:45",
+   "rosters": {
+    "1": [
+     {
+      "slot": "PG",
+      "name": "Tyrese Haliburton",
+      "nba": "IND",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Tyler Herro",
+      "nba": "MIL",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "LaMelo Ball",
+      "nba": "MIN",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "Michael Porter Jr.",
+      "nba": "BKN",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Anthony Davis",
+      "nba": "WAS",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Caleb Wilson",
+      "nba": "CHI",
+      "pos": "PF",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Scottie Barnes",
+      "nba": "TOR",
+      "pos": "SF,PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Sandro Mamukelashvili",
+      "nba": "LAL",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Fred VanVleet",
+      "nba": "HOU",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Egor Dëmin",
+      "nba": "BKN",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Ace Bailey",
+      "nba": "UTA",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jarrett Allen",
+      "nba": "CLE",
+      "pos": "C",
+      "flag": "Q"
+     },
+     {
+      "slot": "BN",
+      "name": "Aday Mara",
+      "nba": "OKC",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Jusuf Nurkić",
+      "nba": "UTA",
+      "pos": "C",
+      "flag": "O"
+     },
+     {
+      "slot": "IL",
+      "name": "Maxime Raynaud",
+      "nba": "SAC",
+      "pos": "C",
+      "flag": "O"
+     }
+    ],
+    "2": [
+     {
+      "slot": "PG",
+      "name": "Anthony Edwards",
+      "nba": "MIN",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Trey Murphy III",
+      "nba": "NOP",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Immanuel Quickley",
+      "nba": "TOR",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "OG Anunoby",
+      "nba": "NYK",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "P.J. Washington",
+      "nba": "DAL",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Jalen Smith",
+      "nba": "CHI",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Walker Kessler",
+      "nba": "LAL",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Joel Embiid",
+      "nba": "PHI",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Myles Turner",
+      "nba": "MIL",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Reed Sheppard",
+      "nba": "HOU",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Chet Holmgren",
+      "nba": "OKC",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Mikal Bridges",
+      "nba": "NYK",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Cason Wallace",
+      "nba": "OKC",
+      "pos": "PG,SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Tobias Harris",
+      "nba": "SAS",
+      "pos": "PF",
+      "flag": "Q"
+     }
+    ],
+    "3": [
+     {
+      "slot": "PG",
+      "name": "Darius Acuff Jr.",
+      "nba": "SAC",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Keaton Wagler",
+      "nba": "LAC",
+      "pos": "SG",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Ryan Rollins",
+      "nba": "MIL",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "Jaime Jaquez Jr.",
+      "nba": "MIL",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Kelly Oubre Jr.",
+      "nba": "IND",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Cameron Boozer",
+      "nba": "MEM",
+      "pos": "PF",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Giannis Antetokounmpo",
+      "nba": "MIA",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Brook Lopez",
+      "nba": "LAC",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Miles Bridges",
+      "nba": "PHX",
+      "pos": "PF",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Brandon Williams",
+      "nba": "GSW",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jalen Duren",
+      "nba": "DET",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jalen Brunson",
+      "nba": "NYK",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "DeMar DeRozan",
+      "nba": "DEN",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Coby White",
+      "nba": "CHA",
+      "pos": "PG,SG",
+      "flag": "O"
+     },
+     {
+      "slot": "IL",
+      "name": "Kon Knueppel",
+      "nba": "CHA",
+      "pos": "SG,SF",
+      "flag": "O"
+     }
+    ],
+    "4": [
+     {
+      "slot": "PG",
+      "name": "Keyonte George",
+      "nba": "UTA",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Deni Avdija",
+      "nba": "POR",
+      "pos": "SG,SF,PF",
+      "flag": "Q"
+     },
+     {
+      "slot": "G",
+      "name": "Tari Eason",
+      "nba": "HOU",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "Jaden McDaniels",
+      "nba": "MIN",
+      "pos": "SF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Domantas Sabonis",
+      "nba": "SAC",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Derik Queen",
+      "nba": "NOP",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Alex Sarr",
+      "nba": "WAS",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Nikola Vučević",
+      "nba": "ORL",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Jalen Green",
+      "nba": "PHX",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "RJ Barrett",
+      "nba": "TOR",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Cade Cunningham",
+      "nba": "DET",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Cameron Johnson",
+      "nba": "DEN",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Stephon Castle",
+      "nba": "SAS",
+      "pos": "PG,SG",
+      "flag": ""
+     }
+    ],
+    "5": [
+     {
+      "slot": "PG",
+      "name": "Luka Dončić",
+      "nba": "LAL",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Desmond Bane",
+      "nba": "ORL",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Kyrie Irving",
+      "nba": "DAL",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "Lauri Markkanen",
+      "nba": "UTA",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Bam Adebayo",
+      "nba": "MIA",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Rui Hachimura",
+      "nba": "LAC",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Zach Edey",
+      "nba": "MEM",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Khaman Maluach",
+      "nba": "PHX",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Dejounte Murray",
+      "nba": "NOP",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Yaxel Lendeborg",
+      "nba": "GSW",
+      "pos": "PF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Ajay Mitchell",
+      "nba": "OKC",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Anfernee Simons",
+      "nba": "PHI",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Josh Hart",
+      "nba": "NYK",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Mark Williams",
+      "nba": "PHX",
+      "pos": "C",
+      "flag": "O"
+     }
+    ],
+    "6": [
+     {
+      "slot": "PG",
+      "name": "Ayo Dosunmu",
+      "nba": "MIN",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Austin Reaves",
+      "nba": "LAL",
+      "pos": "PG,SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Darius Garland",
+      "nba": "LAC",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "Dyson Daniels",
+      "nba": "ATL",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Kyshawn George",
+      "nba": "WAS",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Keegan Murray",
+      "nba": "SAC",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Day'Ron Sharpe",
+      "nba": "BKN",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Collin Murray-Boyles",
+      "nba": "TOR",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Ty Jerome",
+      "nba": "MEM",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Jeremiah Fears",
+      "nba": "NOP",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jamal Murray",
+      "nba": "DEN",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Paul George",
+      "nba": "BOS",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Victor Wembanyama",
+      "nba": "SAS",
+      "pos": "C",
+      "flag": ""
+     }
+    ],
+    "7": [
+     {
+      "slot": "PG",
+      "name": "Davion Mitchell",
+      "nba": "MIA",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Grayson Allen",
+      "nba": "CHA",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Stephen Curry",
+      "nba": "GSW",
+      "pos": "PG",
+      "flag": "P"
+     },
+     {
+      "slot": "SF",
+      "name": "Norman Powell",
+      "nba": "CHI",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Jaren Jackson Jr.",
+      "nba": "UTA",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Paolo Banchero",
+      "nba": "ORL",
+      "pos": "PF",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Andre Drummond",
+      "nba": "NYK",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Rudy Gobert",
+      "nba": "MIN",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Julius Randle",
+      "nba": "BKN",
+      "pos": "PF",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Zach LaVine",
+      "nba": "SAC",
+      "pos": "PG,SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Shai Gilgeous-Alexander",
+      "nba": "OKC",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "James Harden",
+      "nba": "CLE",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Aaron Gordon",
+      "nba": "DEN",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Kristaps Porziņģis",
+      "nba": "GSW",
+      "pos": "C",
+      "flag": "O"
+     }
+    ],
+    "8": [
+     {
+      "slot": "PG",
+      "name": "Collin Gillespie",
+      "nba": "PHX",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Kawhi Leonard",
+      "nba": "TOR",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "CJ McCollum",
+      "nba": "ATL",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "Jalen Johnson",
+      "nba": "ATL",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Brandon Miller",
+      "nba": "CHA",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Matas Buzelis",
+      "nba": "CHI",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Ivica Zubac",
+      "nba": "IND",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Zion Williamson",
+      "nba": "NOP",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Jabari Smith Jr.",
+      "nba": "HOU",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Toumani Camara",
+      "nba": "POR",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Donovan Mitchell",
+      "nba": "CLE",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Peyton Watson",
+      "nba": "CLE",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Yves Missi",
+      "nba": "NOP",
+      "pos": "C",
+      "flag": ""
+     }
+    ],
+    "9": [
+     {
+      "slot": "PG",
+      "name": "Devin Booker",
+      "nba": "PHX",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Jalen Suggs",
+      "nba": "ORL",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "De'Aaron Fox",
+      "nba": "SAS",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "Devin Vassell",
+      "nba": "SAS",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Pascal Siakam",
+      "nba": "IND",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Alperen Şengün",
+      "nba": "HOU",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Kel'el Ware",
+      "nba": "MIL",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Isaiah Jackson",
+      "nba": "LAC",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Jaylen Brown",
+      "nba": "PHI",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Moussa Diabaté",
+      "nba": "CHA",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "AJ Dybantsa",
+      "nba": "WAS",
+      "pos": "SF",
+      "flag": "O"
+     },
+     {
+      "slot": "BN",
+      "name": "Jayson Tatum",
+      "nba": "BOS",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Julian Champagnie",
+      "nba": "SAS",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Anthony Black",
+      "nba": "ORL",
+      "pos": "PG,SG,SF",
+      "flag": "O"
+     },
+     {
+      "slot": "IL",
+      "name": "Nic Claxton",
+      "nba": "CHI",
+      "pos": "C",
+      "flag": "O"
+     }
+    ],
+    "10": [
+     {
+      "slot": "PG",
+      "name": "Trae Young",
+      "nba": "WAS",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Josh Giddey",
+      "nba": "CHI",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Damian Lillard",
+      "nba": "POR",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "LeBron James",
+      "nba": "PHI",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Ausar Thompson",
+      "nba": "DET",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Quentin Grimes",
+      "nba": "LAL",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Mitchell Robinson",
+      "nba": "BOS",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Donovan Clingan",
+      "nba": "POR",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Andrew Wiggins",
+      "nba": "MIA",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Neemias Queta",
+      "nba": "BOS",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Isaiah Hartenstein",
+      "nba": "OKC",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Nikola Jokić",
+      "nba": "DEN",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Christian Braun",
+      "nba": "DEN",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Brandon Ingram",
+      "nba": "LAC",
+      "pos": "SG,SF,PF",
+      "flag": "O"
+     }
+    ],
+    "11": [
+     {
+      "slot": "PG",
+      "name": "Andrew Nembhard",
+      "nba": "IND",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Kevin Durant",
+      "nba": "HOU",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Amen Thompson",
+      "nba": "HOU",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "Jalen Williams",
+      "nba": "OKC",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Franz Wagner",
+      "nba": "ORL",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Cedric Coward",
+      "nba": "MEM",
+      "pos": "SG,SF",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Onyeka Okongwu",
+      "nba": "ATL",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Jakob Poeltl",
+      "nba": "TOR",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Ja Morant",
+      "nba": "POR",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Daniel Gafford",
+      "nba": "DAL",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Tyrese Maxey",
+      "nba": "PHI",
+      "pos": "PG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "John Collins",
+      "nba": "DET",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Payton Pritchard",
+      "nba": "BOS",
+      "pos": "PG",
+      "flag": ""
+     }
+    ],
+    "12": [
+     {
+      "slot": "PG",
+      "name": "Derrick White",
+      "nba": "BOS",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SG",
+      "name": "Cooper Flagg",
+      "nba": "DAL",
+      "pos": "SG,SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "N. Alexander-Walker",
+      "nba": "ATL",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "SF",
+      "name": "Saddiq Bey",
+      "nba": "NOP",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "PF",
+      "name": "Dillon Brooks",
+      "nba": "PHX",
+      "pos": "SF,PF",
+      "flag": ""
+     },
+     {
+      "slot": "F",
+      "name": "Evan Mobley",
+      "nba": "CLE",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Naz Reid",
+      "nba": "CHA",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "C",
+      "name": "Wendell Carter Jr.",
+      "nba": "ORL",
+      "pos": "C",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Darryn Peterson",
+      "nba": "UTA",
+      "pos": "SG",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "VJ Edgecombe",
+      "nba": "PHI",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Dylan Harper",
+      "nba": "SAS",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Karl-Anthony Towns",
+      "nba": "NYK",
+      "pos": "PF,C",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Tre Jones",
+      "nba": "CHI",
+      "pos": "PG,SG",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Brandin Podziemski",
+      "nba": "GSW",
+      "pos": "PG,SG",
+      "flag": "O"
+     }
+    ]
+   },
+   "rosters_asof": "10-22 08:57",
+   "history": {},
+   "warn": []
   },
   {
    "id": "245347",
@@ -524,7 +2054,7 @@
    "type": "points",
    "url": "https://basketball.fantasysports.yahoo.com/nba/245347",
    "week": 1,
-   "status": "Not started yet",
+   "status": "In progress",
    "matchups": [
     {
      "teams": [
@@ -532,17 +2062,85 @@
        "id": "1",
        "name": "[왓더] 올해도",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/11d1f05916549acdea2f16f2b346362b9903c3d6628c80a8be89b3531727d016.jpg",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "283.10"
+       "record": "0-0-0  | 1st",
+       "score": "48.50",
+       "proj": "",
+       "prem_games": 17,
+       "pproj": 336.0,
+       "pstarters": [
+        {
+         "name": "Giannis Antetokounmpo",
+         "n": 3,
+         "v": 69.1
+        },
+        {
+         "name": "Scottie Barnes",
+         "n": 3,
+         "v": 60.3
+        },
+        {
+         "name": "Kawhi Leonard",
+         "n": 3,
+         "v": 57.6
+        },
+        {
+         "name": "Paolo Banchero",
+         "n": 3,
+         "v": 55.1
+        },
+        {
+         "name": "Matas Buzelis",
+         "n": 3,
+         "v": 49.8
+        },
+        {
+         "name": "Damian Lillard",
+         "n": 2,
+         "v": 44.0
+        }
+       ]
       },
       {
        "id": "5",
        "name": "[블랙맴매] 굿바이 요키치",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/bc7e743a35067375e29225c825a8b9c8a0946e0a35b072422085537def8f9ad9.jpg",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "242.95"
+       "record": "0-0-0  | 5th",
+       "score": "89.00",
+       "proj": "",
+       "prem_games": 17,
+       "pproj": 299.9,
+       "pstarters": [
+        {
+         "name": "Cade Cunningham",
+         "n": 3,
+         "v": 63.3
+        },
+        {
+         "name": "Jalen Duren",
+         "n": 3,
+         "v": 53.3
+        },
+        {
+         "name": "Jalen Brunson",
+         "n": 3,
+         "v": 50.9
+        },
+        {
+         "name": "Stephon Castle",
+         "n": 3,
+         "v": 48.6
+        },
+        {
+         "name": "Alex Sarr",
+         "n": 3,
+         "v": 46.3
+        },
+        {
+         "name": "Aaron Gordon",
+         "n": 2,
+         "v": 37.4
+        }
+       ]
       }
      ]
     },
@@ -552,17 +2150,85 @@
        "id": "2",
        "name": "[돌려] 행운의 자판기",
        "logo": "https://s.yimg.com/ba/images/637da75f6c204aba6edefbfb6428f7df757b322ae559977e9de7e3c1c357afeb.png",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "249.65"
+       "record": "0-0-0  | 2nd",
+       "score": "56.50",
+       "proj": "",
+       "prem_games": 19,
+       "pproj": 301.9,
+       "pstarters": [
+        {
+         "name": "Tyrese Haliburton",
+         "n": 3,
+         "v": 57.4
+        },
+        {
+         "name": "Lauri Markkanen",
+         "n": 3,
+         "v": 51.7
+        },
+        {
+         "name": "Kevin Durant",
+         "n": 3,
+         "v": 50.6
+        },
+        {
+         "name": "LeBron James",
+         "n": 4,
+         "v": 50.2
+        },
+        {
+         "name": "Michael Porter Jr.",
+         "n": 3,
+         "v": 47.5
+        },
+        {
+         "name": "Rudy Gobert",
+         "n": 3,
+         "v": 44.5
+        }
+       ]
       },
       {
        "id": "10",
        "name": "[허규] 뀨?!",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/9110f0f839fc8226bee8bfc1f66ca8c720f58c09fcfde805091841435da87ce0.jpg",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "263.90"
+       "record": "0-0-0  | 10th",
+       "score": "3.50",
+       "proj": "",
+       "prem_games": 17,
+       "pproj": 314.5,
+       "pstarters": [
+        {
+         "name": "Cooper Flagg",
+         "n": 3,
+         "v": 60.3
+        },
+        {
+         "name": "Dejounte Murray",
+         "n": 3,
+         "v": 53.7
+        },
+        {
+         "name": "Donovan Mitchell",
+         "n": 2,
+         "v": 52.1
+        },
+        {
+         "name": "Trey Murphy III",
+         "n": 3,
+         "v": 49.7
+        },
+        {
+         "name": "Day'Ron Sharpe",
+         "n": 3,
+         "v": 49.4
+        },
+        {
+         "name": "Brandon Miller",
+         "n": 3,
+         "v": 49.3
+        }
+       ]
       }
      ]
     },
@@ -572,17 +2238,85 @@
        "id": "3",
        "name": "[일도]BMI 32.5",
        "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-hoop-png_1721241779413.png",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "252.40"
+       "record": "0-0-0  | 3rd",
+       "score": "112.50",
+       "proj": "",
+       "prem_games": 17,
+       "pproj": 300.1,
+       "pstarters": [
+        {
+         "name": "Shai Gilgeous-Alexander",
+         "n": 3,
+         "v": 58.8
+        },
+        {
+         "name": "Amen Thompson",
+         "n": 3,
+         "v": 51.8
+        },
+        {
+         "name": "Chet Holmgren",
+         "n": 3,
+         "v": 49.5
+        },
+        {
+         "name": "Zach Edey",
+         "n": 3,
+         "v": 48.0
+        },
+        {
+         "name": "Donovan Clingan",
+         "n": 2,
+         "v": 47.5
+        },
+        {
+         "name": "Onyeka Okongwu",
+         "n": 3,
+         "v": 44.5
+        }
+       ]
       },
       {
        "id": "9",
        "name": "[TwoSon]AI agent Operator",
        "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-necromancer-1-png_1729555612157.png",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "253.15"
+       "record": "0-0-0  | 9th",
+       "score": "68.50",
+       "proj": "",
+       "prem_games": 17,
+       "pproj": 299.6,
+       "pstarters": [
+        {
+         "name": "Josh Giddey",
+         "n": 3,
+         "v": 58.5
+        },
+        {
+         "name": "Jayson Tatum",
+         "n": 2,
+         "v": 52.1
+        },
+        {
+         "name": "Pascal Siakam",
+         "n": 3,
+         "v": 51.7
+        },
+        {
+         "name": "Jaren Jackson Jr.",
+         "n": 3,
+         "v": 49.3
+        },
+        {
+         "name": "James Harden",
+         "n": 2,
+         "v": 46.2
+        },
+        {
+         "name": "VJ Edgecombe",
+         "n": 4,
+         "v": 41.8
+        }
+       ]
       }
      ]
     },
@@ -592,17 +2326,85 @@
        "id": "4",
        "name": "[오주]뚝배기조심",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/4ef3bdce681c009b947d95da1d3e24650681d1aeaa353afcbe069640d3ad2ac2.jpg",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "269.80"
+       "record": "0-0-0  | 4th",
+       "score": "104.00",
+       "proj": "",
+       "prem_games": 17,
+       "pproj": 320.0,
+       "pstarters": [
+        {
+         "name": "Victor Wembanyama",
+         "n": 3,
+         "v": 70.1
+        },
+        {
+         "name": "Trae Young",
+         "n": 3,
+         "v": 56.3
+        },
+        {
+         "name": "Stephen Curry",
+         "n": 3,
+         "v": 51.7
+        },
+        {
+         "name": "Franz Wagner",
+         "n": 3,
+         "v": 50.3
+        },
+        {
+         "name": "Cameron Boozer",
+         "n": 3,
+         "v": 49.9
+        },
+        {
+         "name": "Miles Bridges",
+         "n": 2,
+         "v": 41.6
+        }
+       ]
       },
       {
        "id": "11",
        "name": "[길훈] 개미조심",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/e8e496ce533f66258c2aad3096bd3f3c5a33c3ba5f68ae1e98413b8fe9966982.jpg",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "278.00"
+       "record": "0-0-0  | 11th",
+       "score": "77.50",
+       "proj": "",
+       "prem_games": 19,
+       "pproj": 333.8,
+       "pstarters": [
+        {
+         "name": "Alperen Şengün",
+         "n": 3,
+         "v": 63.5
+        },
+        {
+         "name": "Domantas Sabonis",
+         "n": 3,
+         "v": 62.0
+        },
+        {
+         "name": "Anthony Edwards",
+         "n": 3,
+         "v": 54.5
+        },
+        {
+         "name": "Tyler Herro",
+         "n": 3,
+         "v": 52.9
+        },
+        {
+         "name": "Joel Embiid",
+         "n": 4,
+         "v": 52.7
+        },
+        {
+         "name": "Keyonte George",
+         "n": 3,
+         "v": 48.1
+        }
+       ]
       }
      ]
     },
@@ -612,17 +2414,85 @@
        "id": "6",
        "name": "[진규]'s Primo Team",
        "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-bat-png_1721952190275.png",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "266.45"
+       "record": "0-0-0  | 6th",
+       "score": "59.00",
+       "proj": "",
+       "prem_games": 17,
+       "pproj": 314.3,
+       "pstarters": [
+        {
+         "name": "Jalen Johnson",
+         "n": 3,
+         "v": 62.5
+        },
+        {
+         "name": "Karl-Anthony Towns",
+         "n": 3,
+         "v": 54.8
+        },
+        {
+         "name": "Walker Kessler",
+         "n": 3,
+         "v": 53.0
+        },
+        {
+         "name": "Devin Booker",
+         "n": 2,
+         "v": 50.6
+        },
+        {
+         "name": "Darius Garland",
+         "n": 3,
+         "v": 47.2
+        },
+        {
+         "name": "Nic Claxton",
+         "n": 3,
+         "v": 46.1
+        }
+       ]
       },
       {
        "id": "8",
        "name": "[원영] 럭키비키",
        "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/55090c872a55b8a46df42d87d5f0e05c30d827273ecccbd5bd70d34b9bd804db.jpg",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "288.75"
+       "record": "0-0-0  | 8th",
+       "score": "115.00",
+       "proj": "",
+       "prem_games": 17,
+       "pproj": 332.7,
+       "pstarters": [
+        {
+         "name": "Nikola Jokić",
+         "n": 2,
+         "v": 75.5
+        },
+        {
+         "name": "Zion Williamson",
+         "n": 3,
+         "v": 54.9
+        },
+        {
+         "name": "LaMelo Ball",
+         "n": 3,
+         "v": 53.5
+        },
+        {
+         "name": "Jaylen Brown",
+         "n": 4,
+         "v": 51.1
+        },
+        {
+         "name": "Evan Mobley",
+         "n": 2,
+         "v": 51.0
+        },
+        {
+         "name": "Julius Randle",
+         "n": 3,
+         "v": 46.6
+        }
+       ]
       }
      ]
     },
@@ -632,17 +2502,85 @@
        "id": "7",
        "name": "[동한] 쌉싸라도스",
        "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-shot-clock-png_1721241508784.png",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "251.95"
+       "record": "0-0-0  | 7th",
+       "score": "107.00",
+       "proj": "",
+       "prem_games": 18,
+       "pproj": 309.6,
+       "pstarters": [
+        {
+         "name": "Anthony Davis",
+         "n": 3,
+         "v": 63.4
+        },
+        {
+         "name": "Tyrese Maxey",
+         "n": 4,
+         "v": 57.2
+        },
+        {
+         "name": "Bam Adebayo",
+         "n": 3,
+         "v": 51.0
+        },
+        {
+         "name": "Deni Avdija",
+         "n": 2,
+         "v": 47.6
+        },
+        {
+         "name": "Kon Knueppel",
+         "n": 3,
+         "v": 47.3
+        },
+        {
+         "name": "Desmond Bane",
+         "n": 3,
+         "v": 43.1
+        }
+       ]
       },
       {
        "id": "12",
        "name": "[병호]보스턴",
        "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-king-1-png_1729555366867.png",
-       "record": "0-0-0",
-       "score": "0.00",
-       "proj": "273.10"
+       "record": "0-0-0  | 12th",
+       "score": "56.00",
+       "proj": "",
+       "prem_games": 17,
+       "pproj": 327.8,
+       "pstarters": [
+        {
+         "name": "Luka Dončić",
+         "n": 3,
+         "v": 75.3
+        },
+        {
+         "name": "Austin Reaves",
+         "n": 3,
+         "v": 56.2
+        },
+        {
+         "name": "Cedric Coward",
+         "n": 3,
+         "v": 50.7
+        },
+        {
+         "name": "Jamal Murray",
+         "n": 2,
+         "v": 50.6
+        },
+        {
+         "name": "Ryan Rollins",
+         "n": 3,
+         "v": 49.5
+        },
+        {
+         "name": "Collin Murray-Boyles",
+         "n": 3,
+         "v": 45.6
+        }
+       ]
       }
      ]
     }
@@ -651,7 +2589,7 @@
     {
      "id": "1",
      "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/11d1f05916549acdea2f16f2b346362b9903c3d6628c80a8be89b3531727d016.jpg",
-     "rank": "",
+     "rank": "1",
      "name": "[왓더] 올해도",
      "wlt": "0-0-0",
      "pct": ".000",
@@ -662,7 +2600,7 @@
     {
      "id": "2",
      "logo": "https://s.yimg.com/ba/images/637da75f6c204aba6edefbfb6428f7df757b322ae559977e9de7e3c1c357afeb.png",
-     "rank": "",
+     "rank": "2",
      "name": "[돌려] 행운의 자판기",
      "wlt": "0-0-0",
      "pct": ".000",
@@ -673,18 +2611,18 @@
     {
      "id": "3",
      "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-hoop-png_1721241779413.png",
-     "rank": "",
+     "rank": "3",
      "name": "[일도]BMI 32.5",
      "wlt": "0-0-0",
      "pct": ".000",
      "pts": "0.00",
      "waiver": "8",
-     "moves": "-"
+     "moves": "1"
     },
     {
      "id": "4",
      "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/4ef3bdce681c009b947d95da1d3e24650681d1aeaa353afcbe069640d3ad2ac2.jpg",
-     "rank": "",
+     "rank": "4",
      "name": "[오주]뚝배기조심",
      "wlt": "0-0-0",
      "pct": ".000",
@@ -695,7 +2633,7 @@
     {
      "id": "5",
      "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/bc7e743a35067375e29225c825a8b9c8a0946e0a35b072422085537def8f9ad9.jpg",
-     "rank": "",
+     "rank": "5",
      "name": "[블랙맴매] 굿바이 요키치",
      "wlt": "0-0-0",
      "pct": ".000",
@@ -706,18 +2644,18 @@
     {
      "id": "6",
      "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-bat-png_1721952190275.png",
-     "rank": "",
+     "rank": "6",
      "name": "[진규]'s Primo Team",
      "wlt": "0-0-0",
      "pct": ".000",
      "pts": "0.00",
      "waiver": "12",
-     "moves": "2"
+     "moves": "4"
     },
     {
      "id": "7",
      "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-shot-clock-png_1721241508784.png",
-     "rank": "",
+     "rank": "7",
      "name": "[동한] 쌉싸라도스",
      "wlt": "0-0-0",
      "pct": ".000",
@@ -728,7 +2666,7 @@
     {
      "id": "8",
      "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/55090c872a55b8a46df42d87d5f0e05c30d827273ecccbd5bd70d34b9bd804db.jpg",
-     "rank": "",
+     "rank": "8",
      "name": "[원영] 럭키비키",
      "wlt": "0-0-0",
      "pct": ".000",
@@ -739,29 +2677,29 @@
     {
      "id": "9",
      "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-necromancer-1-png_1729555612157.png",
-     "rank": "",
+     "rank": "9",
      "name": "[TwoSon]AI agent Operator",
      "wlt": "0-0-0",
      "pct": ".000",
      "pts": "0.00",
      "waiver": "5",
-     "moves": "-"
+     "moves": "1"
     },
     {
      "id": "10",
      "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/9110f0f839fc8226bee8bfc1f66ca8c720f58c09fcfde805091841435da87ce0.jpg",
-     "rank": "",
+     "rank": "10",
      "name": "[허규] 뀨?!",
      "wlt": "0-0-0",
      "pct": ".000",
      "pts": "0.00",
      "waiver": "1",
-     "moves": "-"
+     "moves": "1"
     },
     {
      "id": "11",
      "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s90sq/fantasy-logos/e8e496ce533f66258c2aad3096bd3f3c5a33c3ba5f68ae1e98413b8fe9966982.jpg",
-     "rank": "",
+     "rank": "11",
      "name": "[길훈] 개미조심",
      "wlt": "0-0-0",
      "pct": ".000",
@@ -772,7 +2710,7 @@
     {
      "id": "12",
      "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-king-1-png_1729555366867.png",
-     "rank": "",
+     "rank": "12",
      "name": "[병호]보스턴",
      "wlt": "0-0-0",
      "pct": ".000",
@@ -785,80 +2723,993 @@
     {
      "moves": [
       {
-       "player": "Jeremiah Fears",
-       "pos": "NOP - G",
-       "how": "Free Agent",
-       "kind": "add"
-      }
-     ],
-     "teams": [
-      "[왓더] 올해도"
-     ],
-     "time": "Oct 18, 9:01 pm"
-    },
-    {
-     "moves": [
-      {
-       "player": "Ben Simmons",
-       "pos": "SAC - G",
-       "how": "To Free Agent",
-       "kind": "drop"
-      }
-     ],
-     "teams": [
-      "[왓더] 올해도"
-     ],
-     "time": "Oct 18, 7:20 pm"
-    },
-    {
-     "moves": [
-      {
-       "player": "Ben Simmons",
-       "pos": "SAC - G",
+       "player": "Andre Drummond",
+       "pos": "NYK - FC",
        "how": "Free Agent",
        "kind": "add"
       },
       {
-       "player": "Jabari Smith Jr.",
-       "pos": "HOU - FC",
+       "player": "Devin Vassell",
+       "pos": "SAS - G,FC",
        "how": "To Waivers",
        "kind": "drop"
       }
      ],
      "teams": [
-      "[왓더] 올해도"
+      "[진규]'s Primo Team"
      ],
-     "time": "Oct 18, 4:07 am"
+     "time": "Oct 21, 3:16 am"
     },
     {
      "moves": [
       {
-       "player": "Mark Williams",
-       "pos": "PHX - FC",
+       "player": "Jabari Smith Jr.",
+       "pos": "HOU - FC",
        "how": "Free Agent",
        "kind": "add"
       }
      ],
      "teams": [
-      "[원영] 럭키비키"
+      "[허규] 뀨?!"
      ],
-     "time": "Oct 18, 4:03 am"
+     "time": "Oct 21, 2:17 am"
     },
     {
      "moves": [
       {
-       "player": "Jusuf Nurkić",
-       "pos": "UTA - FC",
+       "player": "Anthony Black",
+       "pos": "ORL - G,FC",
        "how": "Free Agent",
        "kind": "add"
       }
      ],
      "teams": [
-      "[원영] 럭키비키"
+      "[TwoSon]AI agent Operator"
      ],
-     "time": "Oct 18, 4:01 am"
+     "time": "Oct 20, 8:32 pm"
+    },
+    {
+     "moves": [
+      {
+       "player": "Devin Vassell",
+       "pos": "SAS - G,FC",
+       "how": "Free Agent",
+       "kind": "add"
+      }
+     ],
+     "teams": [
+      "[진규]'s Primo Team"
+     ],
+     "time": "Oct 20, 6:32 pm"
+    },
+    {
+     "moves": [
+      {
+       "player": "Kristaps Porziņģis",
+       "pos": "GSW - FC",
+       "how": "To Waivers",
+       "kind": "drop"
+      }
+     ],
+     "teams": [
+      "[진규]'s Primo Team"
+     ],
+     "time": "Oct 20, 6:32 pm"
     }
-   ]
+   ],
+   "proj_asof": "10-19 13:33",
+   "rosters": {
+    "1": [
+     {
+      "slot": "G",
+      "name": "Kawhi Leonard",
+      "nba": "TOR",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Damian Lillard",
+      "nba": "POR",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Giannis Antetokounmpo",
+      "nba": "MIA",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Scottie Barnes",
+      "nba": "TOR",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Paolo Banchero",
+      "nba": "ORL",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Matas Buzelis",
+      "nba": "CHI",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Dylan Harper",
+      "nba": "SAS",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Derik Queen",
+      "nba": "NOP",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Darryn Peterson",
+      "nba": "UTA",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jeremiah Fears",
+      "nba": "NOP",
+      "pos": "G",
+      "flag": ""
+     }
+    ],
+    "2": [
+     {
+      "slot": "G",
+      "name": "Tyrese Haliburton",
+      "nba": "IND",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Kevin Durant",
+      "nba": "HOU",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Lauri Markkanen",
+      "nba": "UTA",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "LeBron James",
+      "nba": "PHI",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Rudy Gobert",
+      "nba": "MIN",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Michael Porter Jr.",
+      "nba": "BKN",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Naz Reid",
+      "nba": "CHA",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Mikal Bridges",
+      "nba": "NYK",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Andrew Wiggins",
+      "nba": "MIA",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "CJ McCollum",
+      "nba": "ATL",
+      "pos": "G",
+      "flag": ""
+     }
+    ],
+    "3": [
+     {
+      "slot": "G",
+      "name": "Shai Gilgeous-Alexander",
+      "nba": "OKC",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Amen Thompson",
+      "nba": "HOU",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Chet Holmgren",
+      "nba": "OKC",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Donovan Clingan",
+      "nba": "POR",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Onyeka Okongwu",
+      "nba": "ATL",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Zach Edey",
+      "nba": "MEM",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Dyson Daniels",
+      "nba": "ATL",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Immanuel Quickley",
+      "nba": "TOR",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Keegan Murray",
+      "nba": "SAC",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Zach LaVine",
+      "nba": "SAC",
+      "pos": "G,FC",
+      "flag": ""
+     }
+    ],
+    "4": [
+     {
+      "slot": "G",
+      "name": "Trae Young",
+      "nba": "WAS",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Stephen Curry",
+      "nba": "GSW",
+      "pos": "G",
+      "flag": "P"
+     },
+     {
+      "slot": "FC",
+      "name": "Victor Wembanyama",
+      "nba": "SAS",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Cameron Boozer",
+      "nba": "MEM",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Franz Wagner",
+      "nba": "ORL",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "N. Alexander-Walker",
+      "nba": "ATL",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jarrett Allen",
+      "nba": "CLE",
+      "pos": "FC",
+      "flag": "Q"
+     },
+     {
+      "slot": "BN",
+      "name": "Brandon Ingram",
+      "nba": "LAC",
+      "pos": "G,FC",
+      "flag": "O"
+     },
+     {
+      "slot": "BN",
+      "name": "Miles Bridges",
+      "nba": "PHX",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Neemias Queta",
+      "nba": "BOS",
+      "pos": "FC",
+      "flag": ""
+     }
+    ],
+    "5": [
+     {
+      "slot": "G",
+      "name": "Cade Cunningham",
+      "nba": "DET",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Ja Morant",
+      "nba": "POR",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Jalen Duren",
+      "nba": "DET",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Alex Sarr",
+      "nba": "WAS",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "DeMar DeRozan",
+      "nba": "DEN",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Derrick White",
+      "nba": "BOS",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jalen Brunson",
+      "nba": "NYK",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Stephon Castle",
+      "nba": "SAS",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Aaron Gordon",
+      "nba": "DEN",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jaime Jaquez Jr.",
+      "nba": "MIL",
+      "pos": "G,FC",
+      "flag": ""
+     }
+    ],
+    "6": [
+     {
+      "slot": "G",
+      "name": "Devin Booker",
+      "nba": "PHX",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Darius Garland",
+      "nba": "LAC",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Jalen Johnson",
+      "nba": "ATL",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Walker Kessler",
+      "nba": "LAL",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Karl-Anthony Towns",
+      "nba": "NYK",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Jalen Green",
+      "nba": "PHX",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Andre Drummond",
+      "nba": "NYK",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Ausar Thompson",
+      "nba": "DET",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Josh Hart",
+      "nba": "NYK",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Darius Acuff Jr.",
+      "nba": "SAC",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Nic Claxton",
+      "nba": "CHI",
+      "pos": "FC",
+      "flag": "O"
+     },
+     {
+      "slot": "IL",
+      "name": "Jimmy Butler III",
+      "nba": "GSW",
+      "pos": "FC",
+      "flag": "O"
+     }
+    ],
+    "7": [
+     {
+      "slot": "G",
+      "name": "Tyrese Maxey",
+      "nba": "PHI",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Deni Avdija",
+      "nba": "POR",
+      "pos": "G,FC",
+      "flag": "Q"
+     },
+     {
+      "slot": "FC",
+      "name": "Anthony Davis",
+      "nba": "WAS",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Desmond Bane",
+      "nba": "ORL",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Yaxel Lendeborg",
+      "nba": "GSW",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Bam Adebayo",
+      "nba": "MIA",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "AJ Dybantsa",
+      "nba": "WAS",
+      "pos": "FC",
+      "flag": "O"
+     },
+     {
+      "slot": "BN",
+      "name": "Jaden McDaniels",
+      "nba": "MIN",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Ajay Mitchell",
+      "nba": "OKC",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Kon Knueppel",
+      "nba": "CHA",
+      "pos": "G,FC",
+      "flag": "O"
+     }
+    ],
+    "8": [
+     {
+      "slot": "G",
+      "name": "LaMelo Ball",
+      "nba": "MIN",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Jaylen Brown",
+      "nba": "PHI",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Julius Randle",
+      "nba": "BKN",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Zion Williamson",
+      "nba": "NOP",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "RJ Barrett",
+      "nba": "TOR",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "De'Aaron Fox",
+      "nba": "SAS",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Nikola Jokić",
+      "nba": "DEN",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Evan Mobley",
+      "nba": "CLE",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Coby White",
+      "nba": "CHA",
+      "pos": "G",
+      "flag": "O"
+     },
+     {
+      "slot": "BN",
+      "name": "Fred VanVleet",
+      "nba": "HOU",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Jusuf Nurkić",
+      "nba": "UTA",
+      "pos": "FC",
+      "flag": "O"
+     },
+     {
+      "slot": "IL",
+      "name": "Mark Williams",
+      "nba": "PHX",
+      "pos": "FC",
+      "flag": "O"
+     }
+    ],
+    "9": [
+     {
+      "slot": "G",
+      "name": "Josh Giddey",
+      "nba": "CHI",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "James Harden",
+      "nba": "CLE",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Jayson Tatum",
+      "nba": "BOS",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Jaren Jackson Jr.",
+      "nba": "UTA",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Pascal Siakam",
+      "nba": "IND",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Isaiah Hartenstein",
+      "nba": "OKC",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jalen Suggs",
+      "nba": "ORL",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Payton Pritchard",
+      "nba": "BOS",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "VJ Edgecombe",
+      "nba": "PHI",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "John Collins",
+      "nba": "DET",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Anthony Black",
+      "nba": "ORL",
+      "pos": "G,FC",
+      "flag": "O"
+     }
+    ],
+    "10": [
+     {
+      "slot": "G",
+      "name": "Cooper Flagg",
+      "nba": "DAL",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Donovan Mitchell",
+      "nba": "CLE",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Trey Murphy III",
+      "nba": "NOP",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Brandon Miller",
+      "nba": "CHA",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Ivica Zubac",
+      "nba": "IND",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Dejounte Murray",
+      "nba": "NOP",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Kel'el Ware",
+      "nba": "MIL",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Paul George",
+      "nba": "BOS",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Day'Ron Sharpe",
+      "nba": "BKN",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Jabari Smith Jr.",
+      "nba": "HOU",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "IL",
+      "name": "Brandin Podziemski",
+      "nba": "GSW",
+      "pos": "G",
+      "flag": "O"
+     }
+    ],
+    "11": [
+     {
+      "slot": "G",
+      "name": "Tyler Herro",
+      "nba": "MIL",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Anthony Edwards",
+      "nba": "MIN",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Alperen Şengün",
+      "nba": "HOU",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Domantas Sabonis",
+      "nba": "SAC",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Joel Embiid",
+      "nba": "PHI",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Keyonte George",
+      "nba": "UTA",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Caleb Wilson",
+      "nba": "CHI",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Ty Jerome",
+      "nba": "MEM",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Myles Turner",
+      "nba": "MIL",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Andrew Nembhard",
+      "nba": "IND",
+      "pos": "G",
+      "flag": ""
+     }
+    ],
+    "12": [
+     {
+      "slot": "G",
+      "name": "Luka Dončić",
+      "nba": "LAL",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "G",
+      "name": "Jamal Murray",
+      "nba": "DEN",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Austin Reaves",
+      "nba": "LAL",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "Jalen Williams",
+      "nba": "OKC",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "FC",
+      "name": "OG Anunoby",
+      "nba": "NYK",
+      "pos": "FC",
+      "flag": ""
+     },
+     {
+      "slot": "Util",
+      "name": "Kyrie Irving",
+      "nba": "DAL",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Ryan Rollins",
+      "nba": "MIL",
+      "pos": "G",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Cedric Coward",
+      "nba": "MEM",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Norman Powell",
+      "nba": "CHI",
+      "pos": "G,FC",
+      "flag": ""
+     },
+     {
+      "slot": "BN",
+      "name": "Collin Murray-Boyles",
+      "nba": "TOR",
+      "pos": "FC",
+      "flag": ""
+     }
+    ]
+   },
+   "rosters_asof": "10-22 08:57",
+   "history": {},
+   "warn": []
   }
- ]
+ ],
+ "page_ver": "20261022-1"
 }

@@ -98,18 +98,75 @@ def parse_standings(s, lid):
     return rows
 
 
-def parse_matchup_detail(s):
-    for t in re.findall(r"(?is)<table.*?</table>", s):
-        if "FGM/A" not in t:
+# ── 이번 주 실제 카테고리 누적 ───────────────────────────────────────────
+# 매치업 상세 페이지는 비로그인 시 빈 화면만 내려옴(2026-10-22 확인) → 팀 페이지의 일별 기록
+# 'Starting Lineup Totals' 행(그날 주전 합계, Yahoo 매치업 집계와 같은 기준)을 주차 날짜만큼 합산
+DAY_COLS = ["FGM/A*", "FG%", "FTM/A*", "FT%", "3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"]
+
+
+def day_totals(lid, tid, date):
+    """(주차, 그날 주전 합계 {FGM/A* ...}) — 경기 없으면 0"""
+    s = get(f"{BASE}{lid}/{tid}?date={date}&stat1=S&stat2=D")
+    wk = re.search(r"Week (\d+) vs", s)
+    tot = dict.fromkeys(["fgm", "fga", "ftm", "fta", "3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"], 0.0)
+    for tr in re.findall(r"(?is)<tr[^>]*>(.*?)</tr>", s):
+        c = cells(tr)
+        if len(c) < 2 or c[1] != "Starting Lineup Totals":
             continue
-        trs = re.findall(r"(?is)<tr[^>]*>(.*?)</tr>", t)
-        head = cells(trs[0])
-        res = []
-        for tr in trs[1:3]:
-            c = cells(tr)
-            res.append({h: v for h, v in zip(head, c) if h})
-        return res
-    return []
+        # 자유투 0/0 이면 FT% 칸이 빈 칸 → 빈 칸을 건너뛰지 말고 FGM/A 위치부터 고정 순서로 읽는다
+        i = next(k for k, x in enumerate(c) if re.fullmatch(r"\d+/\d+|-/-", x))
+        v = dict(zip(DAY_COLS, c[i:i + len(DAY_COLS)]))
+        for k, b in [("fg", "FGM/A*"), ("ft", "FTM/A*")]:
+            m = re.fullmatch(r"(\d+)/(\d+)", v.get(b, ""))
+            if m:
+                tot[k + "m"], tot[k + "a"] = float(m.group(1)), float(m.group(2))
+        for k in ["3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"]:
+            tot[k] = f(v.get(k))
+        break
+    return (int(wk.group(1)) if wk else None), tot
+
+
+def week_stats(cfg, week, team_ids):
+    """팀별 이번 주 누적 {tid: {FGM/A*, FTM/A*, FG% ... TO}}. 이틀 이상 지난 날은 확정으로 보고 캐시"""
+    lid = cfg["id"]
+    today = dt.datetime.now(ET).date()
+    cache = read_cache()
+    dc = cache.setdefault("day", {}).setdefault(lid, {})
+    # 주차 시작일: 첫 팀으로 하루씩 거슬러 올라가며 주차가 바뀌는 지점 (주차별로 한 번만)
+    sk = f"w{week}-start"
+    if sk not in dc:
+        start = today
+        for k in range(1, 8):
+            d = today - dt.timedelta(days=k)
+            wk, _ = day_totals(lid, team_ids[0], d.isoformat())
+            if wk != week:
+                break
+            start = d
+        dc[sk] = start.isoformat()
+    start = dt.date.fromisoformat(dc[sk])
+    dates = [start + dt.timedelta(days=k) for k in range((today - start).days + 1)]
+    jobs = [(tid, d) for tid in team_ids for d in dates if f"{tid}|{d}" not in dc]
+
+    def run(j):
+        time.sleep(0.3)  # Yahoo 999 제한 회피용 속도 조절
+        return j, day_totals(lid, j[0], j[1].isoformat())[1]
+    with ThreadPoolExecutor(3) as ex:
+        got = dict(ex.map(run, jobs))
+    out = {}
+    for tid in team_ids:
+        T = dict.fromkeys(["fgm", "fga", "ftm", "fta", "3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"], 0.0)
+        for d in dates:
+            v = dc.get(f"{tid}|{d}") or got[(tid, d)]
+            if (today - d).days >= 2:          # 지난 날(통계 정정 여유 하루) → 확정 저장
+                dc[f"{tid}|{d}"] = v
+            for k in T:
+                T[k] += v[k]
+        out[tid] = {"FGM/A*": f"{T['fgm']:.0f}/{T['fga']:.0f}", "FTM/A*": f"{T['ftm']:.0f}/{T['fta']:.0f}",
+                    "FG%": f"{T['fgm'] / T['fga']:.3f}".lstrip("0") if T["fga"] else "-",
+                    "FT%": f"{T['ftm'] / T['fta']:.3f}".lstrip("0") if T["fta"] else "-",
+                    **{k: f"{T[k]:.0f}" for k in ["3PTM", "PTS", "REB", "AST", "ST", "BLK", "TO"]}}
+    write_cache(cache)
+    return out
 
 
 def num(v):
@@ -335,11 +392,12 @@ PAGES_CACHE_URL = "https://anthonysw0045.github.io/mde-fantasy/proj_cache.json"
 ROSTER_MAX_AGE_S = 3600     # 로스터는 1시간마다 (팀 12개 페이지 → Yahoo 요청 절약)
 
 
-def load_rosters(cfg, team_ids):
+def load_rosters(cfg, team_ids, tx_sig=""):
+    """tx_sig = 최근 거래 표시값 — 새 거래(영입·방출)가 생기면 1시간을 기다리지 않고 바로 다시 수집"""
     lid = cfg["id"]
     cache = read_cache()
     rc = cache.setdefault("rosters", {}).get(lid)
-    if rc and time.time() - rc["ts"] < ROSTER_MAX_AGE_S:
+    if rc and time.time() - rc["ts"] < ROSTER_MAX_AGE_S and rc.get("tx_sig") == tx_sig:
         return rc["teams"], rc["asof"]
     today = dt.datetime.now(ET).date().isoformat()
     teams = {}
@@ -356,7 +414,7 @@ def load_rosters(cfg, team_ids):
         time.sleep(0.5)
     asof = dt.datetime.now(KST).strftime("%m-%d %H:%M")
     cache = read_cache()
-    cache.setdefault("rosters", {})[lid] = {"ts": time.time(), "asof": asof, "teams": teams}
+    cache.setdefault("rosters", {})[lid] = {"ts": time.time(), "asof": asof, "teams": teams, "tx_sig": tx_sig}
     write_cache(cache)
     return teams, asof
 
@@ -486,16 +544,16 @@ def league(cfg):
     lid = cfg["id"]
     home = get(BASE + lid)
     week, status, mus = parse_matchups(home, lid)
+    ws = {}
+    if cfg.get("type") != "points":
+        try:
+            ws = week_stats(cfg, week, sorted({t["id"] for mu in mus for t in mu["teams"]}, key=int))
+        except Exception as e:
+            print("주간 누적 실패", lid, e)
     for mu in mus:
         a, b = mu["teams"]
-        if cfg.get("type") == "points":
-            continue
-        try:
-            det = parse_matchup_detail(get(f"{BASE}{lid}/matchup?week={week}&mid1={a['id']}&mid2={b['id']}"))
-        except Exception as e:
-            print("matchup 실패", lid, a["id"], b["id"], e)
-            det = []
-        if len(det) == 2:
+        if a["id"] in ws and b["id"] in ws:
+            det = [ws[a["id"]], ws[b["id"]]]
             a["stats"], b["stats"] = ({c: d.get(c, "-") for c in ["FGM/A*", "FTM/A*"] + CATS} for d in det)
             mu["cats"] = cat_result(det[0], det[1])
             w = sum(v == "a" for v in mu["cats"].values()); l = sum(v == "b" for v in mu["cats"].values())
@@ -507,14 +565,56 @@ def league(cfg):
            "matchups": mus, "standings": parse_standings(home, lid), "transactions": tx}
     add_projection(cfg, out)  # 고정된 주간 예상 (끝난 주차도 그대로 표시)
     try:
-        out["rosters"], out["rosters_asof"] = load_rosters(cfg, [s["id"] for s in out["standings"]])
+        out["rosters"], out["rosters_asof"] = load_rosters(cfg, [s["id"] for s in out["standings"]],
+                                                           json.dumps(tx[:1], ensure_ascii=False))
     except Exception as e:
         print("로스터 실패", lid, e)
     try:
         out["history"] = record_history(cfg, week)
     except Exception as e:
         print("적중 기록 실패", lid, e)
+    out["warn"] = health(cfg, out)
     return out
+
+
+# ── 자체 점검 (2026-10-22 재발 방지) ─────────────────────────────────────
+# Yahoo 페이지 구조가 바뀌면 수집은 '성공'처럼 끝나도 특정 칸만 조용히 비거나 멈출 수 있음
+# (예: 매치업 상세가 비로그인 빈 화면으로 바뀌어 실제 기록이 '경기 시작 전'에 멈춤).
+# 매 수집마다 항목별로 점검 → 화면 상단 경고 + Actions 실행 실패(빨간 X)로 드러나게 한다.
+def health(cfg, out):
+    w = []
+    mus, n = out.get("matchups") or [], 2 * len(out.get("matchups") or [])
+    if not mus:
+        w.append("매치업을 읽지 못함")
+    if len(out.get("standings") or []) != n:
+        w.append(f"순위 {len(out.get('standings') or [])}팀 (예상 {n}팀)")
+    if cfg.get("type") != "points":
+        for mu in mus:
+            a, b = mu["teams"]
+            ys = f(a["score"]) + f(b["score"])          # Yahoo 표시 카테고리 승수
+            if ys > 0 and not a.get("stats"):
+                w.append(f"실제 기록 미수집: {a['name']} vs {b['name']}")
+            elif a.get("stats") and abs(a.get("cw", 0) - f(a["score"])) + abs(b.get("cw", 0) - f(b["score"])) >= 4:
+                w.append(f"실제 기록이 Yahoo 점수와 다름: {a['name']} {a.get('cw')}-{b.get('cw')} (Yahoo {a['score']}-{b['score']})")
+    if not out.get("proj_asof"):
+        w.append("주간 예상 없음")
+    R = out.get("rosters")
+    if not R:
+        w.append("로스터 미수집")
+    else:
+        short = [s["name"] for s in out.get("standings", []) if len(R.get(s["id"], [])) < 10]
+        if short:
+            w.append("로스터 인원 이상: " + ", ".join(short))
+    return w
+
+
+def previous():
+    """직전 배포본 — 리그 전체 수집 실패 시 빈 화면 대신 마지막 정상값을 보여주기 위함"""
+    try:
+        d = json.loads(get(PAGES_CACHE_URL.replace("proj_cache.json", "data.json"), tries=2))
+        return {l["id"]: l for l in d["leagues"] if not l.get("error")}, d.get("updated", "")
+    except Exception:
+        return {}, ""
 
 
 def main():
@@ -529,10 +629,21 @@ def main():
             print("OK", cfg["id"])
         except Exception as e:
             print("리그 실패", cfg["id"], e)
-            data["leagues"].append({"id": cfg["id"], "name": cfg["name"], "error": str(e)})
+            prev, when = previous()
+            if cfg["id"] in prev:
+                old = prev[cfg["id"]]
+                old["warn"] = [f"이번 수집 실패 → {old.get('stale') or when} 기준 이전 값 표시 ({e})"]
+                old["stale"] = old.get("stale") or when
+                data["leagues"].append(old)
+            else:
+                data["leagues"].append({"id": cfg["id"], "name": cfg["name"], "error": str(e),
+                                        "warn": [f"수집 실패: {e}"]})
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(data, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("saved", OUT)
+    for l in data["leagues"]:
+        for m in l.get("warn") or []:
+            print("::warning::" + l["name"] + " — " + m)
 
 
 if __name__ == "__main__":

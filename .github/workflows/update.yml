@@ -2,8 +2,11 @@ name: update-data
 # 갱신 방식 (2026-10-19): GitHub 예약 실행(schedule)이 새 저장소에서 1.5시간 넘게 한 번도 돌지 않아
 # '이어달리기'로 전환 — 실행이 끝나면 다음 실행을 스스로 띄운다 (외부 서비스·토큰 불필요, 무료).
 #   NBA 경기 시간대(미국 동부 17시~다음날 01시 = KST 06~14시, 서머타임 종료 후 07~15시): 약 5분 간격
-#   그 외 시간: 약 1시간 간격
+#   그 외 시간: 약 20분 간격
 # schedule 은 이어달리기가 끊겼을 때 되살리는 보조 장치.
+# 2026-10-22 개편: 수집·배포(build-deploy)와 대기·다음 실행(relay)을 별도 job·별도 concurrency 로 분리.
+#   이전에는 한 job 안에서 최대 55분 대기하는 동안 실행 슬롯을 잡고 있어 화면 수정(push)·다음 수집이
+#   그 뒤에 줄을 서서 최대 1시간 넘게 반영되지 않았음.
 on:
   schedule:
     - cron: "2-59/5 * * * *"
@@ -15,13 +18,13 @@ permissions:
   pages: write
   id-token: write
   actions: write
-concurrency:
-  group: mde-chain          # 실행 1개 + 대기 1개만 유지 → 이어달리기가 겹쳐도 중복되지 않음
-  cancel-in-progress: false
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 20
+    concurrency:
+      group: mde-deploy     # 배포는 한 번에 하나씩 (동시 배포 충돌 방지), 대기는 최신 1개만
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -41,13 +44,34 @@ jobs:
           path: docs
       - id: deploy
         uses: actions/deploy-pages@v4
+
+  relay:
+    # push(화면 수정)는 배포만 하고 이어달리기는 기존 체인에 맡긴다
+    needs: build-deploy
+    if: ${{ !cancelled() && github.event_name != 'push' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: mde-chain      # 실행 1개 + 대기 1개만 유지 → 이어달리기가 겹쳐도 늘어나지 않음
+      cancel-in-progress: false
+    steps:
       - name: wait then start next run
-        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
           H=$(TZ=America/New_York date +%H)
-          if [ "$H" -ge 17 ] || [ "$H" -lt 1 ]; then W=240; else W=3300; fi
+          if [ "$H" -ge 17 ] || [ "$H" -lt 1 ]; then W=240; else W=1200; fi
           echo "ET hour $H -> sleep $W s"
           sleep $W
-          gh workflow run update.yml --ref main
+          # 다음 실행을 띄우고 실제로 생성됐는지 확인 (실패 시 재시도)
+          for i in 1 2 3 4 5; do
+            T0=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+            gh workflow run update.yml --ref main || true
+            sleep 15
+            N=$(gh run list --workflow update.yml --event workflow_dispatch --limit 5 --json createdAt \
+                  --jq "[.[] | select(.createdAt >= \"$T0\")] | length" || echo 0)
+            if [ "${N:-0}" -ge 1 ]; then echo "next run started"; exit 0; fi
+            echo "dispatch not confirmed (try $i)"; sleep 20
+          done
+          echo "dispatch failed - schedule 보조 장치에 의존"; exit 1
